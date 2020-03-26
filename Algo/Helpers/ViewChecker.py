@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 def ActivityChecker(OldActivity, NewActivity):
     if(OldActivity == NewActivity):
@@ -7,8 +8,6 @@ def ActivityChecker(OldActivity, NewActivity):
         return False
 
 def ViewChecker(img1,img2):
-    value = cv2.subtract(img1, img2)
-    if(value > 95):
-        return True
-    else:
-        return False
+    image1 = cv2.imread(img1)
+    image2 = cv2.imread(img2)
+    return image1.shape == image2.shape and not (np.bitwise_xor(image1, image2).any())

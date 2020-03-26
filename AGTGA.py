@@ -53,14 +53,15 @@ def main(argv):
 def main1():
     #-primary= 'NULLPOINTEXCEPTION' -secondary= 'TESTLENGTH'
     #FOR TESTING
-    pathToApk = 'F:/AGTGA/APPS/error.apk'
+    pathToApk = 'F:/AGTGA/APKS/posifon.apk'
     deviceName = 'Moto Z3 Play'
     desired_caps["app"] = pathToApk
     desired_caps["deviceName"] = deviceName
     durationToWait = 5000
     userName = 'demo4@konto.se'
     password = 'Sommar2018'
-    Main.run(desired_caps)
+    algo = 'ActionCoverageAlgo'
+    Main.run(desired_caps, userName, password, algo, durationToWait)
 
 if __name__ == "__main__":
     #main(sys.argv[1:])
