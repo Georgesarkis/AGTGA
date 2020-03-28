@@ -1,37 +1,28 @@
-
-
 class View(object):
 
-    def __init__(self,id,ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList):
-        self.id = id
+    def __init__(self, SelfID, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList):
+        self.SelfID = SelfID
         self.ScreenShotLocation = ScreenShotLocation
         self.ImageViewList = ImageViewList
         self.TextViewList = TextViewList
         self.EditViewList = EditViewList
         self.ButtonViewList = ButtonViewList
-        self.ParentViewID = None
-        self.ChildView = []
+        self.EverythingExecuted = False
 
-    def getID(self):
-        return self.id
+    def getSelfID(self):
+        return self.SelfID
 
     def getScreenShotLocation(self):
-        return  self.ScreenShotLocation
+        return self.ScreenShotLocation
 
     def getImageViewList(self):
-        return  self.ImageViewList
+        return self.ImageViewList
 
     def getTextViewList(self):
-        return  self.TextViewList
+        return self.TextViewList
 
     def getEditViewList(self):
-        return  self.EditViewList
+        return self.EditViewList
 
     def getButtonViewList(self):
-        return  self.ButtonViewList
-
-    def getParentViewID(self):
-        return self.ParentViewID
-
-    def getChildView(self):
-        return self.ChildView
+        return self.ButtonViewList

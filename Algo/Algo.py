@@ -1,16 +1,15 @@
 import time
-
-from Algo.Helpers.ViewChecker import ActivityChecker, ViewChecker, TakeScreenShot, AppendToLog, getActionCount, NewView, \
-    ClickButton, setWaitTime, getViewList
+from Algo.Helpers.Generator import AppendToLog
+from Algo.Helpers.Handler import NewView, ClickButton, getViewList, FindElements
+from Algo.Helpers.InformationHolder import setWaitTime
 from .LeakDetectionAlgo import LeakDetectionAlgo
 from .ActionCoverageAlgo import ActionCoverageAlgo
 from .StateCoverageAlgo import StateCoverageAlgo
-from Algo.Classes.View import View
-from Algo.Helpers.ViewChecker import FindElements
 
 driver = None
 CurrentView = None
 successfullyLoggedin = False
+
 
 def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, _testCaseCount, TestServer):
     global driver, successfullyLoggedin, CurrentView
@@ -26,15 +25,21 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, _t
         FillEditView(CurrentView.getEditViewList(), username, password)
         print("will press back button")
         driver.back()
-        successfullyLoggedin = ClickLoginButton(driver, CurrentView.getButtonViewList())
 
-    if successfullyLoggedin and TestServer:
-        if ConnectToTestServer(driver):
-            time.sleep(10)
-            NewView(driver, CurrentView)
+        if ClickLoginButton(driver, CurrentView.getButtonViewList()) and TestServer:
+            if ConnectToTestServer(driver):
+                time.sleep(10)
+                CurrentView = NewView(driver, CurrentView)
+            else:
+                print("something bad happend when trying to connect to test server")
+                time.sleep(10)
+                CurrentView = NewView(driver, CurrentView)
         else:
             time.sleep(10)
-            NewView(driver, CurrentView)
+            CurrentView = NewView(driver, CurrentView)
+    else:
+        time.sleep(10)
+        CurrentView = NewView(driver, CurrentView)
 
     if algo == "StateCoverage":
         StateCoverageAlgo()
