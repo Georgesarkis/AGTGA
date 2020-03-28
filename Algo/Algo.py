@@ -54,13 +54,11 @@ def FillEditView(editViewList, userName, password):
         username.clicked = True
         username.click()
         username.send_keys(userName)
-        TakeScreenShot(0, driver)
         Password = editViewList[1]
         AppendToLog("EditView with id: " + str(username.id) + " has been clicked and filled with string: " + password)
         Password.clicked = True
         Password.click()
         Password.send_keys(password)
-        TakeScreenShot(0, driver)
 
 
 def ClickLoginButton(driver, ButtonViewList):
