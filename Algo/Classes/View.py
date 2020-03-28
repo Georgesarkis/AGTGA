@@ -9,6 +9,8 @@ class View(object):
         self.TextViewList = TextViewList
         self.EditViewList = EditViewList
         self.ButtonViewList = ButtonViewList
+        self.ParentViewID = None
+        self.ChildView = []
 
     def getID(self):
         return self.id
@@ -27,3 +29,9 @@ class View(object):
 
     def getButtonViewList(self):
         return  self.ButtonViewList
+
+    def getParentViewID(self):
+        return self.ParentViewID
+
+    def getChildView(self):
+        return self.ChildView

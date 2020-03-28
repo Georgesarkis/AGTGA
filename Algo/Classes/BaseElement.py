@@ -1,3 +1,4 @@
+from .View import View
 
 class BaseElement(object):
 
@@ -24,3 +25,6 @@ class BaseElement(object):
 
     def getConnectedView(self):
         return self.connectedView
+
+    def setConnectedView(self, _view):
+        self.connectedView = _view

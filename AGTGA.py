@@ -11,6 +11,7 @@ desired_caps = {# UiAutomator2 UiAutomator1 Espresso
     #"appActivity" : ".*"
 }
 
+
 def main(argv):
     pathToApk = ''
     deviceName = ''
@@ -57,11 +58,13 @@ def main1():
     deviceName = 'Moto Z3 Play'
     desired_caps["app"] = pathToApk
     desired_caps["deviceName"] = deviceName
-    durationToWait = 5000
+    durationToWait = 4
     userName = 'demo4@konto.se'
     password = 'Sommar2018'
-    algo = 'ActionCoverageAlgo'
-    Main.run(desired_caps, userName, password, algo, durationToWait)
+    algo = 'ActionCoverage'
+    TestServer = True
+    Main.run(desired_caps, userName, password, algo, durationToWait , TestServer)
+
 
 if __name__ == "__main__":
     #main(sys.argv[1:])

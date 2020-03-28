@@ -1,4 +1,0 @@
-New View Has been Created, The activity name is md5dccfc7716c9297b278a85628ec83026a.LoginActivity
-EditView with id: d41ebdca-26ea-4636-9f0e-f1dbadf09097 has been clicked and filled with string: demo4@konto.se
-EditView with id: d41ebdca-26ea-4636-9f0e-f1dbadf09097 has been clicked and filled with string: Sommar2018
-button with id: 66ad3706-b1e9-4897-ba27-627fece033b0 with string value: SIGN IN has been clicked
