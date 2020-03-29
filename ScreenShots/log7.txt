@@ -1,0 +1,4 @@
+New View Has been Created, The activity name is .MainActivity
+new View has been created with view id: 1
+button with id: c4edd166-d662-4ff0-b326-ff3eb5bb4c40 with string value: World Map has been clicked
+Exception aquired with message: NewView() missing 2 required positional arguments: 'driver' and 'CurrentView'

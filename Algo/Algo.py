@@ -1,7 +1,7 @@
 import time
 from Algo.Helpers.Generator import AppendToLog
 from Algo.Helpers.Handler import NewView, ClickButton, getViewList, FindElements
-from Algo.Helpers.InformationHolder import setWaitTime
+from Algo.Helpers.InformationHolder import setWaitTime, setCount, getCount
 from .LeakDetectionAlgo import LeakDetectionAlgo
 from .ActionCoverageAlgo import ActionCoverageAlgo
 from .StateCoverageAlgo import StateCoverageAlgo
@@ -11,14 +11,12 @@ CurrentView = None
 successfullyLoggedin = False
 
 
-def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, _testCaseCount, TestServer):
+def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, TestServer):
     global driver, successfullyLoggedin, CurrentView
-    global TestCaseCount
     CurrentView = _currentView
     Views = getViewList()
     Views.append(CurrentView)
     driver = _driver
-    TestCaseCount = _testCaseCount
     setWaitTime(durationToWait)
 
     if username != "" and password != "":

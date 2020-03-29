@@ -1,0 +1,6 @@
+New View Has been Created, The activity name is .MainActivity
+new View has been created with view id: 1
+button with id: 895f6832-e323-48f0-a66f-0398461008f8 with string value: World Map has been clicked
+button with id: 4fc4ce41-a62e-404f-aeca-a44a5468f3b5 with string value: LIVE has been clicked
+Exception aquired with message: Message: Cached elements 'By.clazz: android.widget.TextView' do not exist in DOM anymore
+

@@ -1,14 +1,19 @@
-from Algo.Helpers.Handler import FindElements, ClickButton, NewView
+import time
+from appium import webdriver
+
+from Algo.Helpers.Handler import FindElements, ClickButton, NewView, UpdateView
 from Algo.Helpers.ViewChecker import CheckOldViews
 import random
 import string
 
-from Algo.Helpers.InformationHolder import getViewList, getViewElementPairs, setRootView, setViewElementPair
+from Algo.Helpers.InformationHolder import *
+from Algo.LeakDetectionAlgo import LeakDetectionAlgo
+from Algo.StateCoverageAlgo import StateCoverageAlgo
 
 
 def ActionCoverageAlgo(_driver, _currentView):
     setRootView(_currentView)
-    MainActionCoverageAlgo(_driver, _currentView)
+    return MainActionCoverageAlgo(_driver, _currentView)
 
 def MainActionCoverageAlgo(_driver, _currentView):
     print("ActionCoverageAlgo")
@@ -19,13 +24,27 @@ def MainActionCoverageAlgo(_driver, _currentView):
         pairList = FindShortestDistanceToView(_driver, _currentView, _desiredView)
         print("Reach to View and run the ActionCoverageAlgo()")
         if pairList is None:
-            print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED .... and NUMBER OF ELEMENTS SKEPT....")
+            print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(getActionCount()) + " trying to go back and try again")
+            print("will press back button")
+            return restartTheDriver(_driver)
+            '''_driver.back()
+            res = CheckOldViews(_driver)
+            if res is not None:
+                print("found old view with id: " + str(res.SelfID))
+                print("old view screenshot location is :" + res.ScreenShotLocation)
+                view = UpdateView(_driver, res)
+                return MainActionCoverageAlgo(_driver, view)
+            else:
+                return False
+                '''
         else:
             print("found the shortest distance, taking proper actions")
-            ActionsToDesiredView(pairList)
-            MainActionCoverageAlgo(_driver, pairList[len(pairList) - 1].ChildView)
+            ActionsToDesiredView(_driver, pairList)
+            return MainActionCoverageAlgo(_driver, pairList[len(pairList) - 1].ChildView)
+        return False
     else:
         print("EVERYTHING IS DONE; YOU ARE AMAZING")
+        return True
 
 
 def RecursiveActionCoverage(_driver, _currentView):
@@ -36,9 +55,10 @@ def RecursiveActionCoverage(_driver, _currentView):
             res = CheckOldViews(_driver)
             if res is not None:
                 print("found old view with id: " + str(res.SelfID))
-                view = res
+                print("old view screenshot location is :" + res.ScreenShotLocation)
+                view = UpdateView(_driver, res)
             else:
-                NewView(_driver, view)
+                view = NewView(_driver, view)
             setViewElementPair(_currentView, el, view)
             return RecursiveActionCoverage(_driver, view)
         else:
@@ -53,13 +73,13 @@ def ChooseElement(_currentView):
     ImageViewList = _currentView.ImageViewList
 
     for el in ButtonListView:
-        if el.clicked == False:
+        if el is not None and el.clicked is False:
             return el
     for el in ImageViewList:
-        if el.clicked == False:
+        if el is not None and el.clicked is False:
             return el
     for el in TextViewList:
-        if el.clicked == False:
+        if el is not None and el.clicked is False:
             return el
     return None
 
@@ -82,9 +102,9 @@ def randomString(stringLength=10):
     return ''.join(random.choice(letters) for i in range(stringLength))
 
 
-def ActionsToDesiredView(pairList):
+def ActionsToDesiredView(_driver, pairList):
     for pair in pairList:
-        ClickButton(pair.Element)
+        ClickButton(_driver, pair.Element) ##TODO THIS NEEDS TO BE CHANGED
 
 
 def FindUnexecutedElements():
@@ -92,21 +112,23 @@ def FindUnexecutedElements():
 
     for view in _viewList:
         for el in view.ImageViewList:
-            if el.clicked is False:
+            if el is not None and el.clicked is False:
                 return view
         for el in view.TextViewList:
-            if el.clicked is False:
+            if el is not None and el.clicked is False:
                 return view
         for el in view.ButtonViewList:
-            if el.clicked is False:
+            if el is not None and el.clicked is False:
                 return view
     return None
 
 
 def FindShortestDistanceToView(_driver, _currentView, _desieredView):
-    if FindShortestDistanceToViewRecursive(_currentView, _desieredView) is None:
+    path = FindShortestDistanceToViewRecursive(_currentView, _desieredView)
+    if path is None:
         _driver.back()
         return FindShortestDistanceToViewRecursive(_currentView, _desieredView)
+    return path
 
 
 def FindShortestDistanceToViewRecursive(_currentView, _desieredView):
@@ -126,3 +148,63 @@ def FindShortestDistanceToViewRecursive(_currentView, _desieredView):
                         if pair3.ChildView == pair2.Parent and pair2.parrent == pair.ChildView:
                             return [pair, pair2, pair3]
     return None
+
+
+def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, TestServer):
+    global driver, successfullyLoggedin, CurrentView
+    CurrentView = _currentView
+    Views = getViewList()
+    Views.append(CurrentView)
+    driver = _driver
+    setWaitTime(durationToWait)
+
+    if username != "" and password != "":
+        FillEditView(CurrentView.getEditViewList(), username, password)
+        print("will press back button")
+        driver.back()
+
+        if ClickLoginButton(driver, CurrentView.getButtonViewList()) and TestServer:
+            if ConnectToTestServer(driver):
+                time.sleep(10)
+                CurrentView = NewView(driver, CurrentView)
+            else:
+                print("something bad happend when trying to connect to test server")
+                time.sleep(10)
+                CurrentView = NewView(driver, CurrentView)
+        else:
+            time.sleep(10)
+            CurrentView = NewView(driver, CurrentView)
+    else:
+        time.sleep(10)
+        CurrentView = NewView(driver, CurrentView)
+
+    if algo == "StateCoverage":
+        StateCoverageAlgo()
+
+    elif algo == "ActionCoverage":
+        ActionCoverageAlgo(driver, CurrentView)
+
+    elif algo == "LeakDetection":
+        LeakDetectionAlgo()
+
+def restartTheDriver(driver):
+    driver.quit()
+    count = getCount()
+    driver = webdriver.Remote(command_executor=getPort(), desired_capabilities=getDesiredCap())
+    CurrentView = NewView()
+    print("run number: " + str(count))
+    setCount(count + 1)
+    Finished = AlgoMain(driver, CurrentView, getAlgo(), getUsername(), getPassord(), getDurationToWait(), getTestServer())
+    return Finished
+
+def ClickLoginButton(driver, ButtonViewList):
+    for el in ButtonViewList:
+        if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in":
+            return ClickButton(driver, el)
+
+def ConnectToTestServer(driver):
+    ButtonViewList = FindElements('ButtonView', driver)
+    for el in ButtonViewList:
+        if el.text.lower() == "yes":
+            return ClickButton(driver, el)
+    return False

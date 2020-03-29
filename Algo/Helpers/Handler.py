@@ -1,17 +1,22 @@
+import os
 import time
 
 from Algo.Classes.View import View
 from Algo.Helpers.Generator import AppendToLog, TakeScreenShot
-from Algo.Helpers.InformationHolder import getActionCount, getViewList, getWaitTime
+from Algo.Helpers.InformationHolder import getActionCount, getViewList, getWaitTime,getCount
 from Algo.Helpers.ViewChecker import ActivityChecker, ViewChecker
 
 
 def NewView(driver, CurrentView):
     Views = getViewList()
     ActionCount = getActionCount()
+    TestCaseCount = str(getCount())
 
+    path = "F:/AGTGA/ScreenShots/" + TestCaseCount
+    if not os.path.exists(path):
+        os.makedirs(path)
     AppendToLog("new View has been created with view id: " + str(CurrentView.SelfID + 1))
-    ScreenShotLocation = "F:/AGTGA/ScreenShots/" + "V" + str(ActionCount - 1) + ".png"
+    ScreenShotLocation = path + "/V" + str(ActionCount - 1) + ".png"
     ButtonViewList = FindElements('ButtonView', driver)
     EditViewList = FindElements('EditView', driver)
     TextViewList = FindElements('TextView', driver)
@@ -20,23 +25,26 @@ def NewView(driver, CurrentView):
     # Create new object for View
     ViewIDCount = CurrentView.SelfID + 1
     CurrentView = View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList)
+    print("new view is created with screenshot location: " + ScreenShotLocation)
     Views.append(CurrentView)
     print("Views list size: " + str(len(Views)))
     return CurrentView
 
 
 def ClickButton(driver, el):
+    if el is None:
+        return False
     WaitTime = getWaitTime()
+    el.clicked = True
     AppendToLog("button with id: " + str(el.id) + " with string value: " + el.text + " has been clicked")
     oldActivity = driver.current_activity
-    el.clicked = True
     el.click()
     time.sleep(WaitTime)
     TakeScreenShot(0, driver)
     if ActivityChecker(oldActivity, driver.current_activity):
         ActionCount = getActionCount()
-        ScreenShotLocation1 = "F:/AGTGA/ScreenShots/" + "V" + str(ActionCount - 2) + ".png"
-        ScreenShotLocation2 = "F:/AGTGA/ScreenShots/" + "V" + str(ActionCount - 1) + ".png"
+        ScreenShotLocation1 = "F:/AGTGA/ScreenShots/"+ str(getCount()) + "/V" + str(ActionCount - 2) + ".png"
+        ScreenShotLocation2 = "F:/AGTGA/ScreenShots/" + str(getCount()) + "/V" + str(ActionCount - 1) + ".png"
         return ViewChecker(ScreenShotLocation1, ScreenShotLocation2)
     return True
 
@@ -66,3 +74,24 @@ def FindElements(ClassType, driver):
     print("list size for " + ClassType + " is: " + str(len(List)))
 
     return List
+
+
+def UpdateView(driver, CurrentView):
+    print("updating view")
+    _buttonViewList = FindElements('ButtonView', driver)
+    _editViewList = FindElements('EditView', driver)
+    _textViewList = FindElements('TextView', driver)
+    _imageViewList = FindElements('ImageView', driver)
+    CurrentView.ButtonViewList = compareEl(CurrentView.ButtonViewList, _buttonViewList)
+    CurrentView.EditViewList = compareEl(CurrentView.EditViewList, _editViewList)
+    CurrentView.TextViewList = compareEl(CurrentView.TextViewList, _textViewList)
+    CurrentView.ImageViewList = compareEl(CurrentView.ImageViewList, _imageViewList)
+    return CurrentView
+
+
+def compareEl(oldList,NewList):
+    if len(NewList) == len(oldList):
+        for i, item in enumerate(oldList):
+            if oldList[i] is None or oldList[i].clicked:
+                NewList[i] = None
+    return NewList

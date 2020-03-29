@@ -1,0 +1,7 @@
+New View Has been Created, The activity name is .MainActivity
+new View has been created with view id: 1
+button with id: 5b814854-f554-4b6e-8bd6-940a14691b83 with string value: World Map has been clicked
+button with id: b0fa4165-28af-4769-82dc-ab2b1e3cae5c with string value: OPINION has been clicked
+new View has been created with view id: 3
+Exception aquired with message: Message: An unknown server-side error occurred while processing the command. Original error: Could not proxy. Proxy error: Could not proxy command to remote server. Original error: Error: socket hang up
+

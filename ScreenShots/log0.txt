@@ -1,0 +1,37 @@
+New View Has been Created, The activity name is .MainActivity
+new View has been created with view id: 1
+button with id: 24c4c907-b17e-46fc-b241-9dc217ec9be7 with string value: World Map has been clicked
+new View has been created with view id: 2
+button with id: 8bb5e06f-243d-48da-a992-4c2ee7999809 with string value: World Map has been clicked
+button with id: 71ffacf8-767b-4eac-8707-6d86269b6787 with string value: U.S. Cases has been clicked
+new View has been created with view id: 3
+button with id: 1f0d8083-2287-492a-81f5-d33d9356911a with string value: World Map has been clicked
+button with id: 698000f0-9d8e-4d8b-b131-b374800d3ab9 with string value: Photos has been clicked
+new View has been created with view id: 3
+button with id: 50f02089-192c-4651-a841-fe821f6bb1f3 with string value: World Map has been clicked
+button with id: 4df7a891-9a93-4987-9e2f-a70056898d11 with string value:  has been clicked
+button with id: a3b8336b-1e5e-4963-93e1-6aea8914ac9c with string value:  has been clicked
+new View has been created with view id: 3
+button with id: 661bf8ba-1abe-4f9e-8fe7-a08265de4ce9 with string value: Notifications has been clicked
+new View has been created with view id: 4
+button with id: d50d93fd-6192-4ba7-ae98-8f732c8af4a4 with string value:  has been clicked
+button with id: 588481e4-1faf-481b-92c6-28c6cc52fafc with string value:  has been clicked
+button with id: 5a4255a9-01f8-4f1d-8097-b800d403736a with string value:  has been clicked
+button with id: d0a4de3d-5e9e-48db-b2e7-8e5ce005c4ed with string value:  has been clicked
+button with id: 635f5a4d-a707-4216-ad5c-830eef7840c5 with string value:  has been clicked
+button with id: e328b701-2553-434a-9d72-946fc9a5c97d with string value:  has been clicked
+button with id: eaf69655-aa9e-49a2-a546-7faf9b15963e with string value: Notifications has been clicked
+button with id: 694c14ca-a5f7-4a0c-9c85-afbba8103eab with string value: Be the first to know about big news, must-read stories and special offers from The Times. has been clicked
+button with id: d6477fed-3229-4bd2-a0eb-a54aa3c120d5 with string value: Breaking News has been clicked
+button with id: e64742c5-1f49-4be3-941f-3ea539a2812b with string value: Urgent and important stories. has been clicked
+button with id: 2dd20290-a053-4536-bcb2-03f0694b39a5 with string value: Top Stories has been clicked
+button with id: b1dad385-fb5f-4109-a740-25eda52522d9 with string value: Special reports and editors' picks. has been clicked
+button with id: cf57dfb8-7c0d-491c-9a83-dfe8c1b31273 with string value: Morning Briefing has been clicked
+button with id: dbba762e-5207-4ede-a91b-c5ff48dd400c with string value: What you need to know to start your day. has been clicked
+button with id: 7a895188-826b-44ab-8650-e58942300181 with string value: Business & Tech has been clicked
+button with id: 258a5ccc-8f79-4abd-a164-d9260287f0a6 with string value: Market-moving news and features. has been clicked
+button with id: 638a8b72-5605-43e0-a745-9f848af344c9 with string value: New York has been clicked
+button with id: 6534be57-be64-4cd7-ab18-d747b61b8671 with string value: Stories from the city, state and region. has been clicked
+button with id: e36e48bc-7cf3-471d-aca3-aaf8331f801d with string value: Politics has been clicked
+button with id: 8e85b1f3-bea7-4eae-b805-0fe44ba0cad5 with string value: Fearless coverage of Washington and beyond. has been clicked
+Exception aquired with message: NewView() missing 2 required positional arguments: 'driver' and 'CurrentView'

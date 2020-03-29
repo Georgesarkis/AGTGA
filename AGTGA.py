@@ -7,7 +7,9 @@ desired_caps = {# UiAutomator2 UiAutomator1 Espresso
     "platformName": "Android",
     "app": '',
     "autoGrantPermissions" : "true",
-    "appWaitActivity" : "*.*"
+    "appWaitActivity" : "*.*",
+    "fullreset" : "false",
+    "noReset" : "true"
     #"appActivity" : ".*"
 }
 
@@ -54,15 +56,15 @@ def main(argv):
 def main1():
     #-primary= 'NULLPOINTEXCEPTION' -secondary= 'TESTLENGTH'
     #FOR TESTING
-    pathToApk = 'F:/AGTGA/APKS/posifon.apk'
-    deviceName = 'Moto Z3 Play'
+    pathToApk = 'F:/AGTGA/APKS/ny.apk'
+    deviceName =  'Moto G (5)'##'Moto Z3 Play'
     desired_caps["app"] = pathToApk
     desired_caps["deviceName"] = deviceName
     durationToWait = 3
-    userName = 'demo4@konto.se'
-    password = 'Sommar2018'
+    userName = ""#'demo4@konto.se'
+    password = ""#'Sommar2018'
     algo = 'ActionCoverage'
-    TestServer = True
+    TestServer = False
     Main.run(desired_caps, userName, password, algo, durationToWait , TestServer)
 
 

@@ -1,37 +1,46 @@
+import os
+
 from appium import webdriver
 from Algo.Algo import AlgoMain
 from Algo.Classes.View import View
+from Algo.Helpers.Generator import AppendToLog
 from Algo.Helpers.Handler import FindElements
-from Algo.Helpers.InformationHolder import getTestCaseCount
-
-driver = None
-TestCaseCount = 0
+from Algo.Helpers.InformationHolder import *
 
 
 def run(desired_caps, username, password, algo, durationToWait, TestServer):
     port = 'http://localhost:4723/wd/hub'
-    global driver
-    _testCaseCount = getTestCaseCount()
-    banana = True
-    count = 0
-
-    while banana:
+    setPort(port)
+    setDesiredCap(desired_caps)
+    setUsername(username)
+    setPassword(password)
+    setAlgo(algo)
+    setDurationToWait(durationToWait)
+    setTestServer(TestServer)
+    Finished = False
+    count = getCount()
+    '''
+    driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
+    CurrentView = NewView()
+    print("run number: " + str(count))
+    AlgoMain(driver, CurrentView, algo, username, password, durationToWait, _testCaseCount, TestServer)
+'''
+    while not Finished:
+        setActionCount(0)
         try:
             driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
-            CurrentView = NewView()
+            CurrentView = NewView(driver)
             print("run number: " + str(count))
-            AlgoMain(driver, CurrentView, algo, username, password, durationToWait, _testCaseCount, TestServer)
-
+            Finished = AlgoMain(driver, CurrentView, algo, username, password, durationToWait, TestServer)
             driver.quit()
+            setCount(getCount() + 1)
         except Exception as e:
             print("Exception aquired with message: " + str(e))
-            count = count + 1
-            print("do you want to stop?")
-            input1 = input()
-            banana = not (input1 == "y")
+            AppendToLog("Exception aquired with message: " + str(e))
+            setCount(getCount() + 1)
 
 
-def NewView():
+def NewView(driver):
     # CreateLog
     ScreenShotLocation = CreateTheLog(driver)
 
@@ -48,12 +57,15 @@ def NewView():
 
 def CreateTheLog(driver):
     log = "New View Has been Created, The activity name is " + driver.current_activity +"\n"
-    _testCaseCount = getTestCaseCount()
+    _testCaseCount = getCount()
+    _actionCount = getActionCount()
     file1 = open("F:/AGTGA/ScreenShots/log" + str(_testCaseCount) + ".txt", "w+")
-    _testCaseCount = _testCaseCount + 1
     file1.write(log)
     file1.close()
-    ViewIDCount = 0
-    ScreenShotLocation = "F:/AGTGA/ScreenShots/" + "V" + str(ViewIDCount) + ".png"
+    path = "F:/AGTGA/ScreenShots/" + str(_testCaseCount)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    ScreenShotLocation = path + "/V" + str(_actionCount) + ".png"
     driver.get_screenshot_as_file(ScreenShotLocation)
+    setActionCount(_actionCount + 1)
     return ScreenShotLocation
