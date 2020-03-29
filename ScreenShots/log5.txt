@@ -1,4 +1,0 @@
-New View Has been Created, The activity name is .MainActivity
-new View has been created with view id: 1
-button with id: f6f91bbc-5452-49ff-aec1-9e100bcd8aea with string value: World Map has been clicked
-Exception aquired with message: 'charmap' codec can't encode character '\u2060' in position 76: character maps to <undefined>
