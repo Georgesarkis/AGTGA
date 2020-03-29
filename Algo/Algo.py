@@ -1,6 +1,6 @@
 import time
 from Algo.Helpers.Generator import AppendToLog
-from Algo.Helpers.Handler import NewView, ClickButton, getViewList, FindElements
+from Algo.Helpers.Handler import NewView, ClickButton, getViewList, FindElements, ClickBackButton
 from Algo.Helpers.InformationHolder import setWaitTime, setCount, getCount
 from .LeakDetectionAlgo import LeakDetectionAlgo
 from .ActionCoverageAlgo import ActionCoverageAlgo
@@ -22,7 +22,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     if username != "" and password != "":
         FillEditView(CurrentView.getEditViewList(), username, password)
         print("will press back button")
-        driver.back()
+        ClickBackButton(driver)
 
         if ClickLoginButton(driver, CurrentView.getButtonViewList()) and TestServer:
             if ConnectToTestServer(driver):

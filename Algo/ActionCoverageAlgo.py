@@ -1,7 +1,7 @@
 import time
 from appium import webdriver
 
-from Algo.Helpers.Handler import FindElements, ClickButton, NewView, UpdateView
+from Algo.Helpers.Handler import FindElements, ClickButton, NewView, UpdateView, ClickButtonXY, ClickBackButton
 from Algo.Helpers.ViewChecker import CheckOldViews
 import random
 import string
@@ -18,29 +18,22 @@ def ActionCoverageAlgo(_driver, _currentView):
 def MainActionCoverageAlgo(_driver, _currentView):
     print("ActionCoverageAlgo")
     _currentView = RecursiveActionCoverage(_driver, _currentView)
+    print("will press back button")
+    ClickBackButton(_driver)
+    BackView = CheckOldViews(_driver)
+    print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(getActionCount()) + " trying to go back and try again")
+    if BackView is not None:
+        return MainActionCoverageAlgo(_driver, BackView)  ###restartTheDriver(_driver)
     print("All actions has been excecuted from this View, Trying to find unexcecuted actions...")
     _desiredView = FindUnexecutedElements()
     if _desiredView is not None:
         pairList = FindShortestDistanceToView(_driver, _currentView, _desiredView)
         print("Reach to View and run the ActionCoverageAlgo()")
-        if pairList is None:
-            print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(getActionCount()) + " trying to go back and try again")
-            print("will press back button")
-            return restartTheDriver(_driver)
-            '''_driver.back()
-            res = CheckOldViews(_driver)
-            if res is not None:
-                print("found old view with id: " + str(res.SelfID))
-                print("old view screenshot location is :" + res.ScreenShotLocation)
-                view = UpdateView(_driver, res)
-                return MainActionCoverageAlgo(_driver, view)
-            else:
-                return False
-                '''
-        else:
+        if pairList is not None:
             print("found the shortest distance, taking proper actions")
             ActionsToDesiredView(_driver, pairList)
-            return MainActionCoverageAlgo(_driver, pairList[len(pairList) - 1].ChildView)
+            _currentView = CheckOldViews(_driver)
+            return MainActionCoverageAlgo(_driver, _currentView)
         return False
     else:
         print("EVERYTHING IS DONE; YOU ARE AMAZING")
@@ -91,7 +84,7 @@ def FillEditView(_driver, _currentView):
         el.clicked = True
         el.click()
         el.send_keys(randomString())
-        _driver.back()
+        ClickBackButton(_driver)
     ## TODO: take screenshot here, after filling in editView
     ## TODO: compore both screenshots to know if something big has been change
 
@@ -104,7 +97,7 @@ def randomString(stringLength=10):
 
 def ActionsToDesiredView(_driver, pairList):
     for pair in pairList:
-        ClickButton(_driver, pair.Element) ##TODO THIS NEEDS TO BE CHANGED
+        ClickButtonXY(_driver, pair.Element) ##TODO THIS NEEDS TO BE CHANGED
 
 
 def FindUnexecutedElements():
@@ -125,9 +118,6 @@ def FindUnexecutedElements():
 
 def FindShortestDistanceToView(_driver, _currentView, _desieredView):
     path = FindShortestDistanceToViewRecursive(_currentView, _desieredView)
-    if path is None:
-        _driver.back()
-        return FindShortestDistanceToViewRecursive(_currentView, _desieredView)
     return path
 
 
@@ -151,7 +141,6 @@ def FindShortestDistanceToViewRecursive(_currentView, _desieredView):
 
 
 def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, TestServer):
-    global driver, successfullyLoggedin, CurrentView
     CurrentView = _currentView
     Views = getViewList()
     Views.append(CurrentView)
@@ -161,7 +150,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     if username != "" and password != "":
         FillEditView(CurrentView.getEditViewList(), username, password)
         print("will press back button")
-        driver.back()
+        ClickBackButton(driver)
 
         if ClickLoginButton(driver, CurrentView.getButtonViewList()) and TestServer:
             if ConnectToTestServer(driver):

@@ -1,9 +1,11 @@
 import os
 import time
 
+from appium.webdriver.common.touch_action import TouchAction
+
 from Algo.Classes.View import View
 from Algo.Helpers.Generator import AppendToLog, TakeScreenShot
-from Algo.Helpers.InformationHolder import getActionCount, getViewList, getWaitTime,getCount
+from Algo.Helpers.InformationHolder import getActionCount, getViewList, getWaitTime, getCount
 from Algo.Helpers.ViewChecker import ActivityChecker, ViewChecker
 
 
@@ -31,6 +33,18 @@ def NewView(driver, CurrentView):
     return CurrentView
 
 
+def ClickButtonXY(driver, el):
+    WaitTime = getWaitTime()
+    AppendToLog("button with id: " + str(el.id) + " with string value: " + el.text + " has been clicked")
+    oldActivity = driver.current_activity
+    actions = TouchAction(driver)
+    actions.tap(actions.point(el.location["x"], el.location["y"])).perform()
+
+
+def ClickBackButton(driver):
+    driver.back()
+
+
 def ClickButton(driver, el):
     if el is None:
         return False
@@ -43,7 +57,7 @@ def ClickButton(driver, el):
     TakeScreenShot(0, driver)
     if ActivityChecker(oldActivity, driver.current_activity):
         ActionCount = getActionCount()
-        ScreenShotLocation1 = "F:/AGTGA/ScreenShots/"+ str(getCount()) + "/V" + str(ActionCount - 2) + ".png"
+        ScreenShotLocation1 = "F:/AGTGA/ScreenShots/" + str(getCount()) + "/V" + str(ActionCount - 2) + ".png"
         ScreenShotLocation2 = "F:/AGTGA/ScreenShots/" + str(getCount()) + "/V" + str(ActionCount - 1) + ".png"
         return ViewChecker(ScreenShotLocation1, ScreenShotLocation2)
     return True
@@ -89,7 +103,7 @@ def UpdateView(driver, CurrentView):
     return CurrentView
 
 
-def compareEl(oldList,NewList):
+def compareEl(oldList, NewList):
     if len(NewList) == len(oldList):
         for i, item in enumerate(oldList):
             if oldList[i] is None or oldList[i].clicked:

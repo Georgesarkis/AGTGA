@@ -16,7 +16,7 @@ def ActivityChecker(OldActivity, NewActivity):
 def ViewChecker(img1, img2):
     res = ImageComputing(img1,img2)
     print("cmparing: " + img1 + " with " + img2 + " the score is " + str(res))
-    if res >= 97:
+    if res >= 95:
         return False
     else:
         return True
