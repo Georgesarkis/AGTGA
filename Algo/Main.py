@@ -74,7 +74,7 @@ def CreateTheCode():
     log = "from com.android.monkeyrunner import MonkeyRunner, MonkeyDevice \n"
     log = log + "device = MonkeyRunner.waitForConnection() \n"
     log = log + "device.installPackage('" + getDesiredCap()["app"] +"')"
-    
+
     _testCaseCount = getCount()
     file1 = open("F:/AGTGA/ScreenShots/TestCase" + str(_testCaseCount) + ".py", "w+")
     file1.write(log)
