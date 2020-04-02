@@ -56,7 +56,7 @@ def main(argv):
 def main1():
     #-primary= 'NULLPOINTEXCEPTION' -secondary= 'TESTLENGTH'
     #FOR TESTING
-    pathToApk = 'F:/AGTGA/APKS/ny.apk'
+    pathToApk = 'F:/AGTGA/APKS/posifon.apk'
     deviceName =  'Moto G (5)'##'Moto Z3 Play'
     desired_caps["app"] = pathToApk
     desired_caps["deviceName"] = deviceName

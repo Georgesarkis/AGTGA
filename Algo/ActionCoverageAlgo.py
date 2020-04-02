@@ -1,6 +1,7 @@
 import time
 from appium import webdriver
 
+from Algo.Helpers.Generator import AppendCodeClickButton
 from Algo.Helpers.Handler import FindElements, ClickButton, NewView, UpdateView, ClickButtonXY, ClickBackButton
 from Algo.Helpers.ViewChecker import CheckOldViews
 import random
@@ -82,6 +83,7 @@ def FillEditView(_driver, _currentView):
     EditViewList = _currentView.EditViewList
     for el in EditViewList:
         el.clicked = True
+        AppendCodeClickButton(el)
         el.click()
         el.send_keys(randomString())
         ClickBackButton(_driver)

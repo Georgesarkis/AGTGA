@@ -3,7 +3,7 @@ import os
 from appium import webdriver
 from Algo.Algo import AlgoMain
 from Algo.Classes.View import View
-from Algo.Helpers.Generator import AppendToLog
+from Algo.Helpers.Generator import AppendToLog, CreateTheCode
 from Algo.Helpers.Handler import FindElements
 from Algo.Helpers.InformationHolder import *
 
@@ -19,11 +19,12 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer):
     setTestServer(TestServer)
     Finished = False
     count = getCount()
-    '''
+
+    CreateTheCode()
     driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
-    CurrentView = NewView()
+    CurrentView = NewView(driver)
     print("run number: " + str(count))
-    AlgoMain(driver, CurrentView, algo, username, password, durationToWait, _testCaseCount, TestServer)
+    AlgoMain(driver, CurrentView, algo, username, password, durationToWait, TestServer)
 '''
     while not Finished:
         setActionCount(0)
@@ -38,7 +39,7 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer):
             print("Exception aquired with message: " + str(e))
             AppendToLog("Exception aquired with message: " + str(e))
             setCount(getCount() + 1)
-
+ '''
 
 def NewView(driver):
     # CreateLog
@@ -56,7 +57,7 @@ def NewView(driver):
 
 
 def CreateTheLog(driver):
-    log = "New View Has been Created, The activity name is " + driver.current_activity +"\n"
+    log = "New View Has been Created, The activity name is " + driver.current_activity + "\n"
     _testCaseCount = getCount()
     _actionCount = getActionCount()
     file1 = open("F:/AGTGA/ScreenShots/log" + str(_testCaseCount) + ".txt", "w+")
@@ -70,12 +71,3 @@ def CreateTheLog(driver):
     setActionCount(_actionCount + 1)
     return ScreenShotLocation
 
-def CreateTheCode():
-    log = "from com.android.monkeyrunner import MonkeyRunner, MonkeyDevice \n"
-    log = log + "device = MonkeyRunner.waitForConnection() \n"
-    log = log + "device.installPackage('" + getDesiredCap()["app"] +"')"
-
-    _testCaseCount = getCount()
-    file1 = open("F:/AGTGA/ScreenShots/TestCase" + str(_testCaseCount) + ".py", "w+")
-    file1.write(log)
-    file1.close()

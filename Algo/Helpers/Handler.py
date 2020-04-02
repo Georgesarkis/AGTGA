@@ -4,7 +4,7 @@ import time
 from appium.webdriver.common.touch_action import TouchAction
 
 from Algo.Classes.View import View
-from Algo.Helpers.Generator import AppendToLog, TakeScreenShot
+from Algo.Helpers.Generator import AppendToLog, TakeScreenShot, AppendCodeClickButton, AppendCodeBackButtonClick
 from Algo.Helpers.InformationHolder import getActionCount, getViewList, getWaitTime, getCount
 from Algo.Helpers.ViewChecker import ActivityChecker, ViewChecker
 
@@ -34,6 +34,7 @@ def NewView(driver, CurrentView):
 
 
 def ClickButtonXY(driver, el):
+    AppendCodeClickButton(el)
     WaitTime = getWaitTime()
     AppendToLog("button with id: " + str(el.id) + " with string value: " + el.text + " has been clicked")
     oldActivity = driver.current_activity
@@ -42,12 +43,14 @@ def ClickButtonXY(driver, el):
 
 
 def ClickBackButton(driver):
+    AppendCodeBackButtonClick()
     driver.back()
 
 
 def ClickButton(driver, el):
     if el is None:
         return False
+    AppendCodeClickButton(el)
     WaitTime = getWaitTime()
     el.clicked = True
     AppendToLog("button with id: " + str(el.id) + " with string value: " + el.text + " has been clicked")
