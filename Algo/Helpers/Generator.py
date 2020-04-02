@@ -25,11 +25,12 @@ def TakeScreenShot(t, driver):
 
 
 def CreateTheCode():
-    log = "from appium import webdriver \n"
-    log = log + "from appium.webdriver.common.touch_action import TouchAction  \n \n \n \n"
+    log = "import time \n"
+    log = log + "from appium import webdriver \n"
+    log = log + "from appium.webdriver.common.touch_action import TouchAction  \n"
+    log = log + "from TestSuite.TestSuiteHelper import ElementFinder \n \n \n"
     log = log + "port = 'http://localhost:4723/wd/hub' \n"
     log = log + "driver = webdriver.Remote(command_executor=port, desired_capabilities=" + AppendDesiredCap() + ") \n \n"
-    log = log + "actions = TouchAction(driver) \n \n"
 
     _testCaseCount = getCount()
     file1 = open("F:/AGTGA/TestSuite/TestCase" + str(_testCaseCount) + ".py", "w+")
@@ -49,9 +50,10 @@ def AppendDesiredCap():
     return  log
 
 def AppendCodeClickButton(el):
-    AppendCode("driver.implicitly_wait(5000)")
-    AppendCode()
-    AppendCode("actions.tap(actions.point(" + str(el.location["x"]) + ", " + str(el.location["y"]) + ")).perform()")
+    AppendCode("time.sleep(10)")
+    AppendCode("el = ElementFinder(driver, " + str(el.location["x"]) +","+ str(el.location["y"]) + ")")
+
+    AppendCode("el.click()")
 
 
 

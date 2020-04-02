@@ -53,7 +53,7 @@ def ClickButton(driver, el):
     AppendCodeClickButton(el)
     WaitTime = getWaitTime()
     el.clicked = True
-    AppendToLog("button with id: " + str(el.id) + " with string value: " + el.text + " has been clicked")
+    AppendToLog("button with id: " + str(el.id) + "with location: " + str(el.location["x"]) +","+ str(el.location["y"])+  " with string value: " + el.text + " has been clicked")
     oldActivity = driver.current_activity
     el.click()
     time.sleep(WaitTime)
