@@ -65,3 +65,9 @@ def AppendCodeClickButton(el):
 def AppendCodeBackButtonClick():
     global log
     AppendCode("driver.back()")
+
+
+def AppendCodeLeakDetection():
+    AppendCode('driver.orientation = "LANDSCAPE"')
+    AppendCode('driver.orientation = "PORTRAIT"')
+    AppendCode('driver.background_app(10)')

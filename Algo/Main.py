@@ -10,14 +10,8 @@ from Algo.Helpers.InformationHolder import *
 
 def run(desired_caps, username, password, algo, durationToWait, TestServer):
     port = 'http://localhost:4723/wd/hub'
-    setPort(port)
-    setDesiredCap(desired_caps)
-    setUsername(username)
-    setPassword(password)
-    setAlgo(algo)
-    setDurationToWait(durationToWait)
-    setTestServer(TestServer)
     Finished = False
+    setDesiredCap(desired_caps)
     count = getCount()
     '''
     CreateTheCode()

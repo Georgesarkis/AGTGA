@@ -25,11 +25,34 @@ time.sleep(10)
 
 #canStartNew = selenium.webdriver.common.utils.is_url_connectable(port) ##returns bool to check it can create a new session
 #print(canStartNew)
-
+"""
 print(driver.query_app_state('io.appium.android.apis'))
+driver.orientation = "LANDSCAPE"
+print("land")
+activity = driver.current_activity ##get current activity
+print(activity)
+time.sleep(10)
+activity = driver.current_activity ##get current activity
+print(activity)
+print(driver.query_app_state('io.appium.android.apis'))
+driver.orientation = "PORTRAIT"
+print("port")
+time.sleep(10)
+driver.orientation = "LANDSCAPE"
+print("land")"""
+time.sleep(10)
 
 activity = driver.current_activity ##get current activity
 print(activity)
+print(driver.query_app_state('io.appium.android.apis'))
+print("before background")
+
+driver.background_app(10)
+print("background")
+activity = driver.current_activity ##get current activity
+print(activity)
+print(driver.query_app_state('io.appium.android.apis'))
+
 time.sleep(10)
 activity = driver.current_activity ##get current activity
 print(activity)

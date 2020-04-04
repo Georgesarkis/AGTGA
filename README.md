@@ -31,10 +31,10 @@ To run this tool:
 py AGTGA.py -app = "PATH TO THE LOCATION OF THE APP YOU WANT TO TEST" 
             -wait = "DURCATION YOU WANT TO WAIT AFTER EVERY SINGLE CLICK"
             -deviceName = "NAME OF THE DEVICE YOU WANT TO TEST ON"
-            -userName = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"       #(demo, default is "")
-            -password = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"       #(demo, default is "")
-            -testServer = "IF THE IS EXTRA STEP TO LOGIN TO TEST SERVER"   #(demo, default is false)
-            -algo = "ALGARITHEM YOU WANT TO USE TO GENERATE THE TEST CASE" #(demo, default is ActionCoverage)
+            -userName = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"       #(demo, default is "")             options: "" , username
+            -password = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"       #(demo, default is "")             options: "" , password
+            -testServer = "IF THE IS EXTRA STEP TO LOGIN TO TEST SERVER"   #(demo, default is false)          options: True, False
+            -algo = "ALGARITHEM YOU WANT TO USE TO GENERATE THE TEST CASE" #(demo, default is ActionCoverage) options: ActionCoverage, LeakDetection
 ```
 
 ## Generated logs and screenshots
@@ -42,9 +42,9 @@ The AGTGA will generate a screenshot after every single actions it takes to invo
 Those logs and screenshots will automatically generate for every single test-case and with a goal to give the developer ability to better understand reason the bug accrued and how to regenerate it manually.
 logs and screenshots can be found in "ScreenShots" folder. 
 
-log and screenshots generated from the first testcase will have be "log0.txt" and the screenshots will be in folder "0" 
+log and screenshots generated from the first test-case will have be "log0.txt" and the screenshots will be in folder "0" 
 
-log and screenshots generated from the second testcase will have be "log1.txt" and the screenshots will be in folder "1"  and so on...
+log and screenshots generated from the second test-case will have be "log1.txt" and the screenshots will be in folder "1"  and so on...
 
 
 ## Generated test-suite
@@ -62,7 +62,7 @@ Generated test-cases will be python code that was generated on Appium format, fo
 ### How to run generated test-cases
 To run the generated test-cases:
 * Connect your android phone to the computer.
-* Run appium server.
+* Run Appium server.
 * Run generated test cases using following commend:
 ```bash
     py TestCase0.py # to run the test-case 1

@@ -2,11 +2,11 @@ import os
 import time
 
 from appium.webdriver.common.touch_action import TouchAction
-
 from Algo.Classes.View import View
 from Algo.Helpers.Generator import AppendToLog, TakeScreenShot, AppendCodeClickButton, AppendCodeBackButtonClick
-from Algo.Helpers.InformationHolder import getActionCount, getViewList, getWaitTime, getCount
+from Algo.Helpers.InformationHolder import getActionCount, getViewList, getWaitTime, getCount, getLeakDetection
 from Algo.Helpers.ViewChecker import ActivityChecker, ViewChecker
+from Algo.LeakDetectionAlgo import LeakDetectionAlgo
 
 
 def NewView(driver, CurrentView):
@@ -30,14 +30,11 @@ def NewView(driver, CurrentView):
     print("new view is created with screenshot location: " + ScreenShotLocation)
     Views.append(CurrentView)
     print("Views list size: " + str(len(Views)))
+
+    if getLeakDetection():
+        LeakDetectionAlgo(driver)
+
     return CurrentView
-
-
-def ClickButtonXY(driver, el):
-    AppendCodeClickButton(el)
-    AppendToLog("button with id: " + str(el.id) + " with string value: " + el.text + " has been clicked")
-    actions = TouchAction(driver)
-    actions.tap(actions.point(el.location["x"], el.location["y"])).perform()
 
 
 def ClickBackButton(driver):

@@ -1,10 +1,8 @@
 import time
 from Algo.Helpers.Generator import AppendToLog
 from Algo.Helpers.Handler import NewView, ClickButton, getViewList, FindElements, ClickBackButton
-from Algo.Helpers.InformationHolder import setWaitTime, setCount, getCount, setActivity
-from .LeakDetectionAlgo import LeakDetectionAlgo
+from Algo.Helpers.InformationHolder import setWaitTime, setActivity, setLeakDetection
 from .ActionCoverageAlgo import ActionCoverageAlgo
-from .StateCoverageAlgo import StateCoverageAlgo
 
 driver = None
 CurrentView = None
@@ -40,14 +38,12 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
         time.sleep(10)
         CurrentView = NewView(driver, CurrentView)
 
-    if algo == "StateCoverage":
-        return StateCoverageAlgo()
-
-    elif algo == "ActionCoverage":
+    if algo == "ActionCoverage":
         return ActionCoverageAlgo(driver, CurrentView)
 
     elif algo == "LeakDetection":
-        return LeakDetectionAlgo()
+        setLeakDetection(True)
+        return ActionCoverageAlgo(driver, CurrentView)
 
 
 def FillEditView(editViewList, userName, password):

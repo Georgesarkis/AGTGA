@@ -2,18 +2,15 @@ import time
 from appium import webdriver
 from random import *
 from Algo.Helpers.Generator import AppendCodeClickButton
-from Algo.Helpers.Handler import FindElements, ClickButton, NewView, UpdateView, ClickButtonXY, ClickBackButton
+from Algo.Helpers.Handler import FindElements, ClickButton, NewView, UpdateView, ClickBackButton
 from Algo.Helpers.ViewChecker import CheckOldViews
 import random
 import string
 
 from Algo.Helpers.InformationHolder import *
-from Algo.LeakDetectionAlgo import LeakDetectionAlgo
-from Algo.StateCoverageAlgo import StateCoverageAlgo
 
 
 def ActionCoverageAlgo(_driver, _currentView):
-    setRootView(_currentView)
     return MainActionCoverageAlgo(_driver, _currentView)
 
 
@@ -53,7 +50,6 @@ def RecursiveActionCoverage(_driver, _currentView):
                 view = UpdateView(_driver, res)
             else:
                 view = NewView(_driver, view)
-            setViewElementPair(_currentView, el, view)
             return RecursiveActionCoverage(_driver, view)
         else:
             return RecursiveActionCoverage(_driver, view)
