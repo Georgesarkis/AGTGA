@@ -13,7 +13,7 @@ def NewView(driver, CurrentView):
     ActionCount = getActionCount()
     TestCaseCount = str(getCount())
 
-    path = "F:/AGTGA/ScreenShots/" + TestCaseCount
+    path = os.getcwd() + "/ScreenShots/" + TestCaseCount
     if not os.path.exists(path):
         os.makedirs(path)
     AppendToLog("new View has been created with view id: " + str(CurrentView.SelfID + 1))
@@ -56,8 +56,8 @@ def ClickButton(driver, el):
     TakeScreenShot(0, driver)
     if ActivityChecker(oldActivity, driver.current_activity):
         ActionCount = getActionCount()
-        ScreenShotLocation1 = "F:/AGTGA/ScreenShots/" + str(getCount()) + "/V" + str(ActionCount - 2) + ".png"
-        ScreenShotLocation2 = "F:/AGTGA/ScreenShots/" + str(getCount()) + "/V" + str(ActionCount - 1) + ".png"
+        ScreenShotLocation1 = os.getcwd() + "/ScreenShots/" + str(getCount()) + "/V" + str(ActionCount - 2) + ".png"
+        ScreenShotLocation2 = os.getcwd() + "/ScreenShots/" + str(getCount()) + "/V" + str(ActionCount - 1) + ".png"
         return ViewChecker(ScreenShotLocation1, ScreenShotLocation2)
     return True
 

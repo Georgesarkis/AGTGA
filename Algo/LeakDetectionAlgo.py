@@ -1,3 +1,5 @@
+import os
+
 from Algo.Helpers.Generator import AppendToLog, AppendCodeLeakDetection
 from Algo.Helpers.InformationHolder import *
 from Algo.Helpers.ViewChecker import ViewChecker
@@ -17,13 +19,13 @@ def LeakDetectionAlgo(driver):
             setPossibleToRotate(False)
 
     if getPossibleToGoBackground():
-        oldScreenShot = "F:/AGTGA/ScreenShots/oldScreenShot.png"
+        oldScreenShot = os.getcwd() + "/ScreenShots/oldScreenShot.png"
         driver.get_screenshot_as_file(oldScreenShot)
         oldActvity = driver.current_activity
         print("setting application to the background")
         driver.background_app(1)
         newActivity = driver.current_activity
-        newScreenshot = "F:/AGTGA/ScreenShots/newScreenshot.png"
+        newScreenshot = os.getcwd() + "/ScreenShots/newScreenshot.png"
         driver.get_screenshot_as_file(newScreenshot)
         if oldActvity is newActivity:
             if ViewChecker(newScreenshot, oldScreenShot):

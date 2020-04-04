@@ -56,10 +56,10 @@ def CreateTheLog(driver):
     log = "New View Has been Created, The activity name is " + driver.current_activity + "\n"
     _testCaseCount = getCount()
     _actionCount = getActionCount()
-    file1 = open("F:/AGTGA/ScreenShots/log" + str(_testCaseCount) + ".txt", "w+")
+    file1 = open(os.getcwd() + "/ScreenShots/log" + str(_testCaseCount) + ".txt", "w+")
     file1.write(log)
     file1.close()
-    path = "F:/AGTGA/ScreenShots/" + str(_testCaseCount)
+    path = os.getcwd() + "/ScreenShots/" + str(_testCaseCount)
     if not os.path.exists(path):
         os.makedirs(path)
     ScreenShotLocation = path + "/V" + str(_actionCount) + ".png"

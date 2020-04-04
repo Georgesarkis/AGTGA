@@ -6,7 +6,7 @@ from Algo.Helpers.InformationHolder import getActionCount, setActionCount, getCo
 def AppendToLog(log):
     print(log)
     log = log + "\n"
-    file1 = open("F:/AGTGA/ScreenShots/log" + str(getCount()) + ".txt", "a")
+    file1 = open(os.getcwd() + "/ScreenShots/log" + str(getCount()) + ".txt", "a")
     file1.write(log)
     file1.close()
 
@@ -15,7 +15,7 @@ def TakeScreenShot(t, driver):
     TestCaseCount = str(getCount())
     _actionCount = getActionCount()
     time.sleep(t)
-    path = "F:/AGTGA/ScreenShots/" + TestCaseCount
+    path = os.getcwd() + "/ScreenShots/" + TestCaseCount
     if not os.path.exists(path):
         os.makedirs(path)
     ScreenShotLocation = path + "/V" + str(_actionCount) + ".png"
@@ -35,14 +35,14 @@ def CreateTheCode():
     log = log + "time.sleep(5)\n"
 
     _testCaseCount = getCount()
-    file1 = open("F:/AGTGA/TestSuite/TestSuite/TestCase" + str(_testCaseCount) + ".py", "w+")
+    file1 = open(os.getcwd() + "/TestSuite/TestSuite/TestCase" + str(_testCaseCount) + ".py", "w+")
     file1.write(log)
     file1.close()
 
 
 def AppendCode(log):
     log = log + "\n"
-    file1 = open("F:/AGTGA/TestSuite/TestSuite/TestCase" + str(getCount()) + ".py", "a")
+    file1 = open(os.getcwd() + "/TestSuite/TestSuite/TestCase" + str(getCount()) + ".py", "a")
     file1.write(log)
     file1.close()
 

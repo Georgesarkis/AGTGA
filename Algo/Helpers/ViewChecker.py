@@ -1,3 +1,5 @@
+import os
+
 import cv2
 import numpy as np
 from Algo.Classes.View import View
@@ -34,7 +36,7 @@ def ViewChecker(img1, img2):
 
 def CheckOldViews(driver):
     Views = getViewList()
-    img2 = "F:/AGTGA/ScreenShots/temp.png"
+    img2 = os.getcwd() + "/ScreenShots/temp.png"
     driver.get_screenshot_as_file(img2)
     for V in Views:
         img1 = V.getScreenShotLocation()
