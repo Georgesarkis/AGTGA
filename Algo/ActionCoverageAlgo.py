@@ -2,7 +2,7 @@ import time
 from appium import webdriver
 from random import *
 from Algo.Helpers.Generator import AppendCodeClickButton
-from Algo.Helpers.Handler import FindElements, ClickButton, NewView, UpdateView, ClickBackButton
+from Algo.Helpers.Handler import ClickButton, NewView, UpdateView, ClickBackButton
 from Algo.Helpers.ViewChecker import CheckOldViews
 import random
 import string
@@ -39,7 +39,7 @@ def MainActionCoverageAlgo(_driver, _v):
 
 
 def RecursiveActionCoverage(_driver, _currentView):
-    el = ChooseElement(_currentView, False, False, False, False)
+    el = ChooseElement(_currentView, False, False, False, False, False)
     view = _currentView
     if el is not None:
         if ClickButton(_driver, el):
@@ -57,14 +57,13 @@ def RecursiveActionCoverage(_driver, _currentView):
         return view
 
 
-def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
-                  ImageButtonListChecked):
+def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked):
     ButtonListView = _currentView.ButtonViewList
     TextViewList = _currentView.TextViewList
     ImageViewList = _currentView.ImageViewList
     ImageButtonList = _currentView.ImageButtonList
-
-    RandomList = random.randrange(1, 5)
+    CheckTextList = _currentView.CheckedTextList
+    RandomList = random.randrange(1, 6)
 
     if not ButtonListViewChecked and RandomList == 1:
         for el in ButtonListView:
@@ -73,7 +72,7 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         ButtonListViewChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
 
     if not ImageViewListChecked and RandomList == 2:
         for el in ImageViewList:
@@ -82,7 +81,7 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         ImageViewListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
 
     if not TextViewListChecked and RandomList == 3:
         for el in TextViewList:
@@ -91,7 +90,7 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         TextViewListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
 
     if not ImageButtonListChecked and RandomList == 4:
         for el in ImageButtonList:
@@ -100,12 +99,21 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         ImageButtonListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
 
-    if TextViewListChecked and ImageViewListChecked and ButtonListViewChecked and ImageButtonListChecked:
+    if not CheckTextListChecked and RandomList == 5:
+        for el in CheckTextList:
+            if el is not None and el.clicked is False:
+                el = randomElementSelector(CheckTextList, 0)
+                if el is not None:
+                    return el
+        CheckTextListChecked = True
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
+
+    if TextViewListChecked and ImageViewListChecked and ButtonListViewChecked and ImageButtonListChecked and CheckTextListChecked:
         return None
     else:
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,ImageButtonListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,ImageButtonListChecked, CheckTextListChecked)
 
 
 def randomElementSelector(list, count):

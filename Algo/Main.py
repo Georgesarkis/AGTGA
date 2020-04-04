@@ -13,13 +13,13 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer):
     Finished = False
     setDesiredCap(desired_caps)
     count = getCount()
-    '''
+    ''' this is used in testing environment, to not go in while loop and try catch, to get more detailed explanation about the crash of the tool(AGTGA) not the app
     CreateTheCode()
     driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
     CurrentView = NewView(driver)
     print("run number: " + str(count))
     AlgoMain(driver, CurrentView, algo, username, password, durationToWait, TestServer)
-'''
+    '''
     while not Finished:
         setActionCount(0)
         CreateTheCode()
@@ -46,9 +46,10 @@ def NewView(driver):
     TextViewList = FindElements("TextView", driver)
     ImageViewList = FindElements("ImageView", driver)
     ImageButtonList = FindElements("ImageButton", driver)
+    CheckedTextList = FindElements("CheckedTextView", driver)
     # Create new object for View
     ViewIDCount = 0
-    return View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList)
+    return View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList, CheckedTextList)
 
 
 def CreateTheLog(driver):
@@ -65,4 +66,3 @@ def CreateTheLog(driver):
     driver.get_screenshot_as_file(ScreenShotLocation)
     setActionCount(_actionCount + 1)
     return ScreenShotLocation
-

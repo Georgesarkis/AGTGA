@@ -63,7 +63,7 @@ def main1():
     durationToWait = 4
     userName = ""#'demo4@konto.se'
     password = ""#'Sommar2018'
-    algo = 'ActionCoverage'
+    algo = 'LeakDetection'#'ActionCoverage'
     TestServer = False
     Main.run(desired_caps, userName, password, algo, durationToWait , TestServer)
 

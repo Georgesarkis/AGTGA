@@ -1,10 +1,9 @@
 import os
 import time
 
-from appium.webdriver.common.touch_action import TouchAction
 from Algo.Classes.View import View
 from Algo.Helpers.Generator import AppendToLog, TakeScreenShot, AppendCodeClickButton, AppendCodeBackButtonClick
-from Algo.Helpers.InformationHolder import getActionCount, getViewList, getWaitTime, getCount, getLeakDetection
+from Algo.Helpers.InformationHolder import *
 from Algo.Helpers.ViewChecker import ActivityChecker, ViewChecker
 from Algo.LeakDetectionAlgo import LeakDetectionAlgo
 
@@ -24,14 +23,16 @@ def NewView(driver, CurrentView):
     TextViewList = FindElements('TextView', driver)
     ImageViewList = FindElements('ImageView', driver)
     ImageButtonList = FindElements("ImageButton", driver)
+    CheckedTextList = FindElements("CheckedTextView", driver)
+
     # Create new object for View
     ViewIDCount = CurrentView.SelfID + 1
-    CurrentView = View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList)
+    CurrentView = View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList, CheckedTextList)
     print("new view is created with screenshot location: " + ScreenShotLocation)
     Views.append(CurrentView)
     print("Views list size: " + str(len(Views)))
 
-    if getLeakDetection():
+    if getLeakDetection() and (getPossibleToRotate() or getPossibleToGoBackground()) :
         LeakDetectionAlgo(driver)
 
     return CurrentView
@@ -84,6 +85,11 @@ def FindElements(ClassType, driver):
     elif ClassType == "ImageButton":
         if "ImageButton" in source:
             List = driver.find_elements_by_class_name('android.widget.ImageButton')
+
+    elif ClassType == "CheckedTextView":
+        if "CheckedTextView" in source:
+            List = driver.find_elements_by_class_name("android.widget.CheckedTextView")
+
     for el in List:
         el.clicked = False
 
@@ -99,12 +105,15 @@ def UpdateView(driver, CurrentView):
     _textViewList = FindElements('TextView', driver)
     _imageViewList = FindElements('ImageView', driver)
     _ImageButton = FindElements('ImageButton', driver)
+    _checkedTextList = FindElements("CheckedTextView", driver)
 
     CurrentView.ButtonViewList = compareEl(CurrentView.ButtonViewList, _buttonViewList)
     CurrentView.EditViewList = compareEl(CurrentView.EditViewList, _editViewList)
     CurrentView.TextViewList = compareEl(CurrentView.TextViewList, _textViewList)
     CurrentView.ImageViewList = compareEl(CurrentView.ImageViewList, _imageViewList)
     CurrentView.ImageButtonList = compareEl(CurrentView.ImageButtonList, _ImageButton)
+    CurrentView.CheckedTextList = compareEl(CurrentView.CheckedTextList, _checkedTextList)
+
     return CurrentView
 
 
