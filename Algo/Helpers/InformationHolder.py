@@ -14,7 +14,16 @@ username = ""
 password = ""
 durationToWait = 0
 TestServer = False
+Activity = ""
 
+
+def getActivity():
+    global Activity
+    return Activity
+
+def setActivity(a):
+    global Activity
+    Activity = a
 
 def getPort():
     global port
@@ -60,9 +69,11 @@ def getPassord():
     global password
     return password
 
+
 def setPassword(p):
     global password
     password = p
+
 
 def getDurationToWait():
     global durationToWait
@@ -74,7 +85,6 @@ def setDurationToWait(t):
     durationToWait = t
 
 
-
 def getTestServer():
     global TestServer
     return TestServer
@@ -83,7 +93,6 @@ def getTestServer():
 def setTestServer(t):
     global TestServer
     TestServer = t
-
 
 
 def getCount():

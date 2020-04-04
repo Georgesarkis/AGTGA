@@ -28,6 +28,7 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer):
 '''
     while not Finished:
         setActionCount(0)
+        CreateTheCode()
         try:
             driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
             CurrentView = NewView(driver)
@@ -39,7 +40,7 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer):
             print("Exception aquired with message: " + str(e))
             AppendToLog("Exception aquired with message: " + str(e))
             setCount(getCount() + 1)
- '''
+'''
 
 def NewView(driver):
     # CreateLog

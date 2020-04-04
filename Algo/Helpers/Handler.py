@@ -35,9 +35,7 @@ def NewView(driver, CurrentView):
 
 def ClickButtonXY(driver, el):
     AppendCodeClickButton(el)
-    WaitTime = getWaitTime()
     AppendToLog("button with id: " + str(el.id) + " with string value: " + el.text + " has been clicked")
-    oldActivity = driver.current_activity
     actions = TouchAction(driver)
     actions.tap(actions.point(el.location["x"], el.location["y"])).perform()
 
@@ -85,6 +83,10 @@ def FindElements(ClassType, driver):
     elif ClassType == "ImageView":
         if "ImageView" in source:
             List = driver.find_elements_by_class_name('android.widget.ImageView')
+
+    elif ClassType == "ImageButton":
+        if "ImageButton" in source:
+            List = driver.find_elements_by_class_name('android.widget.ImageButton')
     for el in List:
         el.clicked = False
 
@@ -99,10 +101,12 @@ def UpdateView(driver, CurrentView):
     _editViewList = FindElements('EditView', driver)
     _textViewList = FindElements('TextView', driver)
     _imageViewList = FindElements('ImageView', driver)
+    _ImageButton = FindElements(("ImageButton",driver))
     CurrentView.ButtonViewList = compareEl(CurrentView.ButtonViewList, _buttonViewList)
     CurrentView.EditViewList = compareEl(CurrentView.EditViewList, _editViewList)
     CurrentView.TextViewList = compareEl(CurrentView.TextViewList, _textViewList)
     CurrentView.ImageViewList = compareEl(CurrentView.ImageViewList, _imageViewList)
+    CurrentView.ImageButtonList = compareEl(CurrentView.ImageButtonList, _imageViewList)
     return CurrentView
 
 

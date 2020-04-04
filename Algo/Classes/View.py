@@ -1,12 +1,13 @@
 class View(object):
 
-    def __init__(self, SelfID, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList):
+    def __init__(self, SelfID, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList):
         self.SelfID = SelfID
         self.ScreenShotLocation = ScreenShotLocation
         self.ImageViewList = ImageViewList
         self.TextViewList = TextViewList
         self.EditViewList = EditViewList
         self.ButtonViewList = ButtonViewList
+        self.ImageButtonList = ImageButtonList
         self.EverythingExecuted = False
 
     def getSelfID(self):
@@ -26,3 +27,6 @@ class View(object):
 
     def getButtonViewList(self):
         return self.ButtonViewList
+
+    def getImageButtonList(self):
+        return self.ImageButtonList

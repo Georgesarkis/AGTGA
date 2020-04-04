@@ -1,6 +1,6 @@
 import time
 from appium import webdriver
-
+from random import *
 from Algo.Helpers.Generator import AppendCodeClickButton
 from Algo.Helpers.Handler import FindElements, ClickButton, NewView, UpdateView, ClickButtonXY, ClickBackButton
 from Algo.Helpers.ViewChecker import CheckOldViews
@@ -16,33 +16,33 @@ def ActionCoverageAlgo(_driver, _currentView):
     setRootView(_currentView)
     return MainActionCoverageAlgo(_driver, _currentView)
 
-def MainActionCoverageAlgo(_driver, _currentView):
+
+def MainActionCoverageAlgo(_driver, _v):
     print("ActionCoverageAlgo")
-    _currentView = RecursiveActionCoverage(_driver, _currentView)
+    _currentView = RecursiveActionCoverage(_driver, _v)
+    if _v.SelfID == _currentView.SelfID:
+        print("could not found any more execution!")
+        return True
     print("will press back button")
     ClickBackButton(_driver)
     BackView = CheckOldViews(_driver)
-    print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(getActionCount()) + " trying to go back and try again")
+    print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(
+        getActionCount()) + " trying to go back and try again")
     if BackView is not None:
         return MainActionCoverageAlgo(_driver, BackView)  ###restartTheDriver(_driver)
-    print("All actions has been excecuted from this View, Trying to find unexcecuted actions...")
-    _desiredView = FindUnexecutedElements()
-    if _desiredView is not None:
-        pairList = FindShortestDistanceToView(_driver, _currentView, _desiredView)
-        print("Reach to View and run the ActionCoverageAlgo()")
-        if pairList is not None:
-            print("found the shortest distance, taking proper actions")
-            ActionsToDesiredView(_driver, pairList)
-            _currentView = CheckOldViews(_driver)
-            return MainActionCoverageAlgo(_driver, _currentView)
-        return False
     else:
-        print("EVERYTHING IS DONE; YOU ARE AMAZING")
-        return True
+        Currentactivity = _driver.current_activity
+        if Currentactivity[:2] == getActivity()[:2]:
+            print("New view has been found...")
+            View = NewView(_driver, _currentView)
+            return MainActionCoverageAlgo(_driver, View)
+        else:
+            print("Close the app unintentionally, will try to start again")
+            return False
 
 
 def RecursiveActionCoverage(_driver, _currentView):
-    el = ChooseElement(_currentView)
+    el = ChooseElement(_currentView, False, False, False, False)
     view = _currentView
     if el is not None:
         if ClickButton(_driver, el):
@@ -61,21 +61,59 @@ def RecursiveActionCoverage(_driver, _currentView):
         return view
 
 
-def ChooseElement(_currentView):
+def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                  ImageButtonListChecked):
     ButtonListView = _currentView.ButtonViewList
     TextViewList = _currentView.TextViewList
     ImageViewList = _currentView.ImageViewList
+    ImageButtonList = _currentView.ImageButtonList
 
-    for el in ButtonListView:
-        if el is not None and el.clicked is False:
-            return el
-    for el in ImageViewList:
-        if el is not None and el.clicked is False:
-            return el
-    for el in TextViewList:
-        if el is not None and el.clicked is False:
-            return el
-    return None
+    RandomList = random.randrange(1, 5)
+
+    if not ButtonListViewChecked and RandomList == 1:
+        for el in ButtonListView:
+            if el is not None and el.clicked is False:
+                return randomElementSelector(ButtonListView, 0)
+        ButtonListViewChecked = True
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked)
+
+    if not ImageViewListChecked and RandomList == 2:
+        for el in ImageViewList:
+            if el is not None and el.clicked is False:
+                return randomElementSelector(ImageViewList, 0)
+        ImageViewListChecked = True
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked)
+
+    if not TextViewListChecked and RandomList == 3:
+        for el in TextViewList:
+            if el is not None and el.clicked is False:
+                return randomElementSelector(TextViewList, 0)
+        TextViewListChecked = True
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked)
+
+    if not ImageButtonListChecked and RandomList == 4:
+        for el in ImageButtonList:
+            if el is not None and el.clicked is False:
+                return randomElementSelector(TextViewList, 0)
+        ImageButtonListChecked = True
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, ImageButtonListChecked)
+
+    if TextViewListChecked and ImageViewListChecked and ButtonListViewChecked and ImageButtonListChecked:
+        return None
+    else:
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                             ImageButtonListChecked)
+
+
+def randomElementSelector(list, count):
+    ListSize = len(list)
+    choice = random.randrange(0, ListSize)
+    if count >= len(list):
+        return None
+    if list[choice] is not None and list[choice].clicked is False:
+        return list[choice]
+    else:
+        return randomElementSelector(list, count + 1)
 
 
 def FillEditView(_driver, _currentView):
@@ -99,7 +137,7 @@ def randomString(stringLength=10):
 
 def ActionsToDesiredView(_driver, pairList):
     for pair in pairList:
-        ClickButtonXY(_driver, pair.Element) ##TODO THIS NEEDS TO BE CHANGED
+        ClickButtonXY(_driver, pair.Element)  ##TODO THIS NEEDS TO BE CHANGED
 
 
 def FindUnexecutedElements():
@@ -178,6 +216,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     elif algo == "LeakDetection":
         LeakDetectionAlgo()
 
+
 def restartTheDriver(driver):
     driver.quit()
     count = getCount()
@@ -185,13 +224,16 @@ def restartTheDriver(driver):
     CurrentView = NewView()
     print("run number: " + str(count))
     setCount(count + 1)
-    Finished = AlgoMain(driver, CurrentView, getAlgo(), getUsername(), getPassord(), getDurationToWait(), getTestServer())
+    Finished = AlgoMain(driver, CurrentView, getAlgo(), getUsername(), getPassord(), getDurationToWait(),
+                        getTestServer())
     return Finished
+
 
 def ClickLoginButton(driver, ButtonViewList):
     for el in ButtonViewList:
         if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in":
             return ClickButton(driver, el)
+
 
 def ConnectToTestServer(driver):
     ButtonViewList = FindElements('ButtonView', driver)

@@ -12,22 +12,32 @@ desired_caps = {# UiAutomator2 UiAutomator1 Espresso
     "platformName": "Android",
     "app": 'F:/AGTGA/APKS/posifon.apk',
     "autoGrantPermissions" : "true",
-    "appWaitActivity" : "*.*"#"md5dccfc7716c9297b278a85628ec83026a.LoginActivity"
-    #"appActivity" : ".*"
+    "appWaitActivity" : "*.*",#"md5dccfc7716c9297b278a85628ec83026a.LoginActivity"
+    #"appActivity" : ".*",
+    "fullreset": "false",
+     "noReset": "true"
 }
 
 port = 'http://localhost:4723/wd/hub'
 driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
 
+time.sleep(10)
+
 #canStartNew = selenium.webdriver.common.utils.is_url_connectable(port) ##returns bool to check it can create a new session
 #print(canStartNew)
 
+print(driver.query_app_state('io.appium.android.apis'))
+
 activity = driver.current_activity ##get current activity
 print(activity)
+time.sleep(10)
+activity = driver.current_activity ##get current activity
+print(activity)
+print(driver.query_app_state('io.appium.android.apis'))
 
 #el = driver.find_elements_by_accessibility_id("inputA")
 #print(el)
-
+"""
 source = driver.page_source
 #print(source)
 
@@ -38,8 +48,6 @@ file1.write(source)
 file1 = open("source.txt","a") 
 print("saved the three to the file")
 file1.close() 
-
-
 element = driver.find_element_by_id("posifon.Care:id/username")
 element.click()
 element.send_keys("demo4@konto.se")
@@ -50,7 +58,7 @@ element.click()
 element.send_keys("Sommar2018")
 print("entered password")
 
-driver.back()
+
 
 element = driver.find_elements_by_class_name('android.widget.Button')
 
@@ -144,6 +152,7 @@ print(activity1)
 #else:
 #  print("FALSE we did not get 15")
 
+"""
 
 print("Exiting program")
 driver.quit()

@@ -1,7 +1,7 @@
 import time
 from Algo.Helpers.Generator import AppendToLog
 from Algo.Helpers.Handler import NewView, ClickButton, getViewList, FindElements, ClickBackButton
-from Algo.Helpers.InformationHolder import setWaitTime, setCount, getCount
+from Algo.Helpers.InformationHolder import setWaitTime, setCount, getCount, setActivity
 from .LeakDetectionAlgo import LeakDetectionAlgo
 from .ActionCoverageAlgo import ActionCoverageAlgo
 from .StateCoverageAlgo import StateCoverageAlgo
@@ -16,6 +16,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     CurrentView = _currentView
     Views = getViewList()
     Views.append(CurrentView)
+    setActivity(_driver.current_activity)
     driver = _driver
     setWaitTime(durationToWait)
 
