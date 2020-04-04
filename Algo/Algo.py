@@ -41,13 +41,13 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
         CurrentView = NewView(driver, CurrentView)
 
     if algo == "StateCoverage":
-        StateCoverageAlgo()
+        return StateCoverageAlgo()
 
     elif algo == "ActionCoverage":
-        ActionCoverageAlgo(driver, CurrentView)
+        return ActionCoverageAlgo(driver, CurrentView)
 
     elif algo == "LeakDetection":
-        LeakDetectionAlgo()
+        return LeakDetectionAlgo()
 
 
 def FillEditView(editViewList, userName, password):
