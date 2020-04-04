@@ -60,7 +60,7 @@ def main1():
     deviceName =  'Moto G (5)'##'Moto Z3 Play'
     desired_caps["app"] = pathToApk
     desired_caps["deviceName"] = deviceName
-    durationToWait = 0
+    durationToWait = 4
     userName = ""#'demo4@konto.se'
     password = ""#'Sommar2018'
     algo = 'ActionCoverage'

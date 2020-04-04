@@ -75,28 +75,28 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
             if el is not None and el.clicked is False:
                 return randomElementSelector(ButtonListView, 0)
         ButtonListViewChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,ImageButtonListChecked)
 
     if not ImageViewListChecked and RandomList == 2:
         for el in ImageViewList:
             if el is not None and el.clicked is False:
                 return randomElementSelector(ImageViewList, 0)
         ImageViewListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,ImageButtonListChecked)
 
     if not TextViewListChecked and RandomList == 3:
         for el in TextViewList:
             if el is not None and el.clicked is False:
                 return randomElementSelector(TextViewList, 0)
         TextViewListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,ImageButtonListChecked)
 
     if not ImageButtonListChecked and RandomList == 4:
         for el in ImageButtonList:
             if el is not None and el.clicked is False:
                 return randomElementSelector(TextViewList, 0)
         ImageButtonListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, ImageButtonListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,ImageButtonListChecked)
 
     if TextViewListChecked and ImageViewListChecked and ButtonListViewChecked and ImageButtonListChecked:
         return None

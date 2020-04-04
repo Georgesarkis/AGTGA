@@ -23,10 +23,10 @@ def NewView(driver, CurrentView):
     EditViewList = FindElements('EditView', driver)
     TextViewList = FindElements('TextView', driver)
     ImageViewList = FindElements('ImageView', driver)
-
+    ImageButtonList = FindElements("ImageButton", driver)
     # Create new object for View
     ViewIDCount = CurrentView.SelfID + 1
-    CurrentView = View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList)
+    CurrentView = View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList)
     print("new view is created with screenshot location: " + ScreenShotLocation)
     Views.append(CurrentView)
     print("Views list size: " + str(len(Views)))
@@ -101,12 +101,13 @@ def UpdateView(driver, CurrentView):
     _editViewList = FindElements('EditView', driver)
     _textViewList = FindElements('TextView', driver)
     _imageViewList = FindElements('ImageView', driver)
-    _ImageButton = FindElements(("ImageButton",driver))
+    _ImageButton = FindElements('ImageButton', driver)
+
     CurrentView.ButtonViewList = compareEl(CurrentView.ButtonViewList, _buttonViewList)
     CurrentView.EditViewList = compareEl(CurrentView.EditViewList, _editViewList)
     CurrentView.TextViewList = compareEl(CurrentView.TextViewList, _textViewList)
     CurrentView.ImageViewList = compareEl(CurrentView.ImageViewList, _imageViewList)
-    CurrentView.ImageButtonList = compareEl(CurrentView.ImageButtonList, _imageViewList)
+    CurrentView.ImageButtonList = compareEl(CurrentView.ImageButtonList, _ImageButton)
     return CurrentView
 
 

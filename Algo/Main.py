@@ -19,7 +19,7 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer):
     setTestServer(TestServer)
     Finished = False
     count = getCount()
-
+    '''
     CreateTheCode()
     driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
     CurrentView = NewView(driver)
@@ -40,7 +40,7 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer):
             print("Exception aquired with message: " + str(e))
             AppendToLog("Exception aquired with message: " + str(e))
             setCount(getCount() + 1)
-'''
+
 
 def NewView(driver):
     # CreateLog
@@ -51,10 +51,10 @@ def NewView(driver):
     EditViewList = FindElements("EditView", driver)
     TextViewList = FindElements("TextView", driver)
     ImageViewList = FindElements("ImageView", driver)
-
+    ImageButtonList = FindElements("ImageButton", driver)
     # Create new object for View
     ViewIDCount = 0
-    return View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList)
+    return View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList)
 
 
 def CreateTheLog(driver):
