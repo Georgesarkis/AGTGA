@@ -1,73 +1,41 @@
+import argparse
 import sys, getopt
 from Algo import Main
 
-desired_caps = {# UiAutomator2 UiAutomator1 Espresso
-    "automationName" : "UiAutomator2",
+desired_caps = {  # UiAutomator2 UiAutomator1 Espresso
+    "automationName": "UiAutomator2",
     "deviceName": "",
     "platformName": "Android",
     "app": '',
-    "autoGrantPermissions" : "true",
-    "appWaitActivity" : "*.*",
-    "fullreset" : "false",
-    "noReset" : "true"
-    #"appActivity" : ".*"
+    "autoGrantPermissions": "true",
+    "appWaitActivity": "*.*",
+    "fullreset": "false",
+    "noReset": "true"
+    # "appActivity" : ".*"
 }
 
 
-def main(argv):
-    pathToApk = ''
-    deviceName = ''
-    durationToWait = None
-    userName = ''
-    password = ''
-
-    try:
-        opts, args = getopt.getopt(argv, "hp:d", ["p=", "d="])
-    except getopt.GetoptError:
-        print("error accured")
-        print('test.py -p <apk path> -d <device name> -w <duraition to wait in milliseconds> -u <username> -p <password>')
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
-            print('test.py -p  <apk path> -d <device name> -w <duraition to wait in milliseconds> -u <username> -p <password>')
-            sys.exit()
-        elif opt in ("-p", "--app"):
-            pathToApk = arg
-        elif opt in ("-d", "--deviceName"):
-            deviceName = arg
-        elif opt in ("-w", "--durationToWait"):
-            durationToWait = arg
-            durationToWait = int(float(durationToWait))
-        elif opt in ("-u", "--username"):
-            userName = arg
-        elif opt in ("-p", "--password"):
-            password = arg
-
-    print('pathToApk file is "', pathToApk)
-    print('deviceName is "', deviceName)
-    print('duration To Wait after every action is "', durationToWait)
-    print('userName is "', userName)
-    print('Password is "', password)
-
+def main(pathToApk="F:/AGTGA/APKS/posifon.apk", deviceName="Moto G (5)", durationToWait=4, userName='demo4@konto.se',
+         password='Sommar2018', algo='LeakDetection', TestServer=False):
     desired_caps["app"] = pathToApk
     desired_caps["deviceName"] = deviceName
-
-
-def main1():
-    #-primary= 'NULLPOINTEXCEPTION' -secondary= 'TESTLENGTH'
-    #FOR TESTING
-    pathToApk = 'F:/AGTGA/APKS/posifon.apk'
-    deviceName =  'Moto G (5)'##'Moto Z3 Play'
-    desired_caps["app"] = pathToApk
-    desired_caps["deviceName"] = deviceName
-    durationToWait = 4
-    userName = ""#'demo4@konto.se'
-    password = ""#'Sommar2018'
-    algo = 'LeakDetection'#'ActionCoverage'
-    TestServer = False
-    Main.run(desired_caps, userName, password, algo, durationToWait , TestServer)
+    if userName is None or password is None:
+        userName = ""
+        password = ""
+    Main.run(desired_caps, userName, password, algo, durationToWait, TestServer)
 
 
 if __name__ == "__main__":
-    #main(sys.argv[1:])
-    main1()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("APKPath", help="Path to the location of the apk you want to test")
+    parser.add_argument("DeviceName", help="Name of the device that is connected to your computer and you want to test on")
+    parser.add_argument("Duration", help="Duration to wait in seconds after every single action")
+    parser.add_argument("Algo", help="Algorithm you want to use to generate the test case, available options: ActionCoverage, LeakDetection")
+
+    parser.add_argument("--Username", help="Username of the login if app requires login")
+    parser.add_argument("--Password", help="Password of the login if app requires login")
+    parser.add_argument("--TestServer", help="If exist will connect to test server", action="store_true")
+
+    args = parser.parse_args()
+
+    main(args.APKPath, args.DeviceName, args.Duration, args.userName, args.Password, args.TestServer)

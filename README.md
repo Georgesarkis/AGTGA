@@ -28,13 +28,21 @@ To run this tool:
 * Start the appium server.
 * Import the master branch and from terminal run following command:
 ```bash
-py AGTGA.py -app = "PATH TO THE LOCATION OF THE APP YOU WANT TO TEST" 
-            -wait = "DURCATION YOU WANT TO WAIT AFTER EVERY SINGLE CLICK"
-            -deviceName = "NAME OF THE DEVICE YOU WANT TO TEST ON"
-            -userName = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"        #(demo, default is "")             options: "" , username
-            -password = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"        #(demo, default is "")             options: "" , password
-            -testServer = "IF THE IS EXTRA STEP TO LOGIN TO TEST SERVER"    #(demo, default is false)          options: True, False
-            -algo = "ALGORITHM YOU WANT TO USE TO GENERATE THE TEST CASE"   #(demo, default is ActionCoverage) options: ActionCoverage, LeakDetection
+
+usage: AGTGA.py [-h] [--Username USERNAME] [--Password PASSWORD] [--TestServer] APKPath DeviceName Duration Algo
+
+positional arguments:
+  APKPath              Path to the location of the apk you want to test
+  DeviceName           Name of the device that is connected to your computer and you want to test on
+  Duration             Duration to wait in seconds after every single action
+  Algo                 Algorithm you want to use to generate the test case, available options: ActionCoverage, LeakDetection
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --Username USERNAME  Username of the login if app requires login
+  --Password PASSWORD  Password of the login if app requires login
+  --TestServer         If exist will connect to test server
+
 ```
 
 ## Generated logs and screenshots
@@ -65,8 +73,9 @@ To run the generated test-cases:
 * Run Appium server.
 * Run generated test cases using following commend:
 ```bash
-    py TestCase0.py # to run the test-case 1
-    py TestCase1.py # to run the test-case 2 .....
+
+    py AGTGATestRunner.py   #To run all test-case that has been generated
+
 ```
 
 
