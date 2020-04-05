@@ -31,10 +31,10 @@ To run this tool:
 py AGTGA.py -app = "PATH TO THE LOCATION OF THE APP YOU WANT TO TEST" 
             -wait = "DURCATION YOU WANT TO WAIT AFTER EVERY SINGLE CLICK"
             -deviceName = "NAME OF THE DEVICE YOU WANT TO TEST ON"
-            -userName = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"       #(demo, default is "")             options: "" , username
-            -password = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"       #(demo, default is "")             options: "" , password
-            -testServer = "IF THE IS EXTRA STEP TO LOGIN TO TEST SERVER"   #(demo, default is false)          options: True, False
-            -algo = "ALGARITHEM YOU WANT TO USE TO GENERATE THE TEST CASE" #(demo, default is ActionCoverage) options: ActionCoverage, LeakDetection
+            -userName = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"        #(demo, default is "")             options: "" , username
+            -password = "IF THE APPLICAITON  REQUIRES LOGIN PROCESS"        #(demo, default is "")             options: "" , password
+            -testServer = "IF THE IS EXTRA STEP TO LOGIN TO TEST SERVER"    #(demo, default is false)          options: True, False
+            -algo = "ALGORITHM YOU WANT TO USE TO GENERATE THE TEST CASE"   #(demo, default is ActionCoverage) options: ActionCoverage, LeakDetection
 ```
 
 ## Generated logs and screenshots

@@ -1,6 +1,6 @@
 import os
 import time
-from Algo.Helpers.InformationHolder import getActionCount, setActionCount, getCount, getDesiredCap
+from Algo.Helpers.InformationHolder import *
 
 
 def AppendToLog(log):
@@ -14,6 +14,7 @@ def AppendToLog(log):
 def TakeScreenShot(t, driver):
     TestCaseCount = str(getCount())
     _actionCount = getActionCount()
+    AddNumberOfActionsInThisTestCase()
     time.sleep(t)
     path = os.getcwd() + "/ScreenShots/" + TestCaseCount
     if not os.path.exists(path):
@@ -56,20 +57,29 @@ def AppendDesiredCap():
 
 
 def AppendCodeClickButton(el):
-    AppendCode("time.sleep(5)")
-    AppendCode("el = ElementFinder(driver, " + str(el.location["x"]) + "," + str(el.location["y"]) + ")")
-
-    AppendCode("el.click()")
+    AddLenghtOfTestCase()
+    s = "time.sleep(5) \n"
+    s = s + "el = ElementFinder(driver, " + str(el.location["x"]) + "," + str(el.location["y"]) + ") \n"
+    s = s + "el.click()"
+    AppendCode(s)
 
 
 def AppendCodeBackButtonClick():
-    global log
+    AddLenghtOfTestCase()
     AppendCode("driver.back()")
 
 
 def AppendCodeLeakDetection(Background,rotate):
+    AddLenghtOfTestCase()
     if rotate:
         AppendCode('driver.orientation = "LANDSCAPE"')
         AppendCode('driver.orientation = "PORTRAIT"')
     if Background:
         AppendCode('driver.background_app(1)')
+
+
+def AppendScoresToCode():
+    s = "# Number of actions taken in this test-case: " + str(getNumberOfActionsInThisTestCase()) + "\n"
+    s = s + "# Number of Views visited: " + str(getNumberOfViewsInThisTestCase()) + "\n"
+    s = s + "# Test-case length: " + str(getLenghtOfTestCase() * 3)
+    AppendCode(s)

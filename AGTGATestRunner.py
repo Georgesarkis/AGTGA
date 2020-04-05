@@ -7,6 +7,12 @@ os.chdir(currentPath + '/TestSuite/TestSuite')
 list = os.listdir()
 
 for f in list:
-    path = "py " + str(f)
-    print(path)
-    os.system(path)
+    try:
+        print("executing the " + f)
+        path = "py " + str(f)
+        print(path)
+        os.system(path)
+    except Exception as e:
+        print("test-case " + f + " has detected bug")
+        print("with exception: " + str(e))
+

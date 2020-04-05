@@ -9,6 +9,7 @@ from Algo.LeakDetectionAlgo import LeakDetectionAlgo
 
 
 def NewView(driver, CurrentView):
+    AddNumberOfViewsInThisTestCase()
     Views = getViewList()
     ActionCount = getActionCount()
     TestCaseCount = str(getCount())

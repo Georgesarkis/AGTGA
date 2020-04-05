@@ -1,3 +1,5 @@
+##TODO: THIS SHOULD BE CHANGE INTO CLASSES
+
 ActionCount = 0
 Views = []
 WaitTime = 0
@@ -7,6 +9,51 @@ Activity = ""
 LeakDetection = False
 PossibleToRotate = True
 PossibleToGoBackground = True
+NumberOfActionsInThisTestCase = 0
+NumberOfViewsInThisTestCase = 0
+LenghtOfTestCase = 0
+
+
+def RestartNumberOfActionsInThisTestCase():
+    global NumberOfActionsInThisTestCase
+    NumberOfActionsInThisTestCase = 0
+
+def RestartNumberOfViewsInThisTestCase():
+    global NumberOfViewsInThisTestCase
+    NumberOfViewsInThisTestCase = 0
+
+def RestartLenghtOfTestCase():
+    global LenghtOfTestCase
+    LenghtOfTestCase = 0
+
+def AddLenghtOfTestCase():
+    global LenghtOfTestCase
+    LenghtOfTestCase = LenghtOfTestCase + 1
+
+
+def AddNumberOfViewsInThisTestCase():
+    global NumberOfViewsInThisTestCase
+    NumberOfViewsInThisTestCase = NumberOfViewsInThisTestCase + 1
+
+
+def AddNumberOfActionsInThisTestCase():
+    global NumberOfActionsInThisTestCase
+    NumberOfActionsInThisTestCase = NumberOfActionsInThisTestCase + 1
+
+
+def getNumberOfActionsInThisTestCase():
+    global NumberOfActionsInThisTestCase
+    return NumberOfActionsInThisTestCase
+
+
+def getNumberOfViewsInThisTestCase():
+    global NumberOfViewsInThisTestCase
+    return NumberOfViewsInThisTestCase
+
+
+def getLenghtOfTestCase():
+    global LenghtOfTestCase
+    return LenghtOfTestCase
 
 
 def getPossibleToRotate():
