@@ -28,7 +28,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-usage: py AGTGA.py F:/AGTGA/APKS/posifon.apk "Moto G (5)" LeakDetection 3 --Username=demo@demo.com --Password=S*******8 --TestServer
+usage: py AGTGA.py F:/AGTGA/APKS/****.apk "Moto G (5)" LeakDetection 3 --Username=demo@demo.com --Password=********* --TestServer
 """
 import argparse
 from Algo import Main
