@@ -69,17 +69,23 @@ def AppendCodeBackButtonClick():
     AppendCode("driver.back()")
 
 
-def AppendCodeLeakDetection(Background,rotate):
-    AddLenghtOfTestCase()
-    if rotate:
-        AppendCode('driver.orientation = "LANDSCAPE"')
-        AppendCode('driver.orientation = "PORTRAIT"')
-    if Background:
-        AppendCode('driver.background_app(1)')
-
-
 def AppendScoresToCode():
     s = "# Number of actions taken in this test-case: " + str(getNumberOfActionsInThisTestCase()) + "\n"
     s = s + "# Number of Views visited: " + str(getNumberOfViewsInThisTestCase()) + "\n"
     s = s + "# Test-case length: " + str(getLenghtOfTestCase() * 3)
     AppendCode(s)
+
+def AppendCodeEditText(el, str):
+    AppendCodeClickButton(el)
+    s = "el.send_keys(" + str + ") \n"
+    s = s + "driver.back()"
+    AppendCode(s)
+
+
+def AppendCodeLeakDetectionBackground():
+    AppendCode('driver.orientation = "LANDSCAPE"')
+    AppendCode('driver.orientation = "PORTRAIT"')
+
+
+def AppendCodeLeakDetectionRotation():
+    AppendCode('driver.background_app(1)')

@@ -1,7 +1,7 @@
 import time
 from Algo.Helpers.Generator import AppendToLog
-from Algo.Helpers.Handler import NewView, ClickButton, getViewList, FindElements, ClickBackButton
-from Algo.Helpers.InformationHolder import setWaitTime, setActivity, setLeakDetection
+from Algo.Helpers.Handler import *
+from Algo.Helpers.InformationHolder import *
 from .ActionCoverageAlgo import ActionCoverageAlgo
 
 driver = None
@@ -17,6 +17,9 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     setActivity(_driver.current_activity)
     driver = _driver
     setWaitTime(durationToWait)
+    SetUsername(username)
+    SetPassword(password)
+    SetRootView(CurrentView)
 
     if username != "" and password != "":
         FillEditView(CurrentView.getEditViewList(), username, password)
@@ -37,34 +40,15 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     else:
         time.sleep(10)
         CurrentView = NewView(driver, CurrentView)
-
+    print("the algo value is")
+    print(algo)
     if algo == "ActionCoverage":
+        setLeakDetection(False)
         return ActionCoverageAlgo(driver, CurrentView)
 
     elif algo == "LeakDetection":
         setLeakDetection(True)
         return ActionCoverageAlgo(driver, CurrentView)
-
-
-def FillEditView(editViewList, userName, password):
-    global driver
-    if len(editViewList) == 2:
-        username = editViewList[0]
-        AppendToLog("EditView with id: " + str(username.id) + " has been clicked and filled with string: " + userName)
-        username.clicked = True
-        username.click()
-        username.send_keys(userName)
-        Password = editViewList[1]
-        AppendToLog("EditView with id: " + str(username.id) + " has been clicked and filled with string: " + password)
-        Password.clicked = True
-        Password.click()
-        Password.send_keys(password)
-
-
-def ClickLoginButton(driver, ButtonViewList):
-    for el in ButtonViewList:
-        if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in":
-            return ClickButton(driver, el)
 
 
 def ConnectToTestServer(driver):

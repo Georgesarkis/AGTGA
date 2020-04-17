@@ -1,8 +1,8 @@
 import time
 from appium import webdriver
 from random import *
-from Algo.Helpers.Generator import AppendCodeClickButton
-from Algo.Helpers.Handler import ClickButton, NewView, UpdateView, ClickBackButton
+from Algo.Helpers.Generator import AppendCodeClickButton, AppendCodeEditText
+from Algo.Helpers.Handler import *
 from Algo.Helpers.ViewChecker import CheckOldViews
 import random
 import string
@@ -17,14 +17,21 @@ def ActionCoverageAlgo(_driver, _currentView):
 def MainActionCoverageAlgo(_driver, _v):
     print("ActionCoverageAlgo")
     _currentView = RecursiveActionCoverage(_driver, _v)
-    if _v.SelfID == _currentView.SelfID:
+
+    if _currentView == None:
+        print("restarting the AGTGA")
+        return False
+
+    """
+    elif _v.SelfID == _currentView.SelfID:
         print("could not found any more execution!")
         return True
+    """
+
     print("will press back button")
     ClickBackButton(_driver)
     BackView = CheckOldViews(_driver)
-    print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(
-        getActionCount()) + " trying to go back and try again")
+    print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(getActionCount()) + " trying to go back and try again")
     if BackView is not None:
         return MainActionCoverageAlgo(_driver, BackView)
     else:
@@ -39,6 +46,7 @@ def MainActionCoverageAlgo(_driver, _v):
 
 
 def RecursiveActionCoverage(_driver, _currentView):
+    FillEditFiled(_driver, _currentView)
     el = ChooseElement(_currentView, False, False, False, False, False)
     view = _currentView
     if el is not None:
@@ -48,8 +56,15 @@ def RecursiveActionCoverage(_driver, _currentView):
                 print("found old view with id: " + str(res.SelfID))
                 print("old view screenshot location is :" + res.ScreenShotLocation)
                 view = UpdateView(_driver, res)
+                if view.getSelfID() == GetRootView().getSelfID():
+                    return None
+
             else:
                 view = NewView(_driver, view)
+                if getLeakDetection() and (getPossibleToRotate() or getPossibleToGoBackground()):
+                    if not LeakDetectionAlgo(_driver):
+                        return None
+
             return RecursiveActionCoverage(_driver, view)
         else:
             return RecursiveActionCoverage(_driver, view)
@@ -127,20 +142,27 @@ def randomElementSelector(list, count):
         return randomElementSelector(list, count + 1)
 
 
-def FillEditView(_driver, _currentView):
+def FillEditFiled(_driver, _currentView):
     ## TODO: take screenshot here, before filling in editView
     EditViewList = _currentView.EditViewList
-    for el in EditViewList:
-        el.clicked = True
-        AppendCodeClickButton(el)
-        el.click()
-        el.send_keys(randomString())
-        ClickBackButton(_driver)
+    if EditViewList == 2:
+        FillEditView(EditViewList, GetUsername(), GetPassword())
+        ClickLoginButton(_driver, _currentView.ButtonViewList)
+    else:
+        for el in EditViewList:
+            if el.clicked == False:
+                el.clicked = True
+                str = randomString()
+                AppendCodeEditText(el, str)
+                el.click()
+                el.send_keys(str)
+                ClickBackButton(_driver)
     ## TODO: take screenshot here, after filling in editView
     ## TODO: compore both screenshots to know if something big has been change
 
 
-def randomString(stringLength=10):
-    """Generate a random string of fixed length """
+def randomString():
+    """Generate a random string"""
+    RandomStringLength = random.randrange(1, 1000)
     letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for i in range(stringLength))
+    return ''.join(random.choice(letters) for i in range(RandomStringLength))

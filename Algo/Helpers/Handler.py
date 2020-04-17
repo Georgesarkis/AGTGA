@@ -33,9 +33,6 @@ def NewView(driver, CurrentView):
     Views.append(CurrentView)
     print("Views list size: " + str(len(Views)))
 
-    if getLeakDetection() and (getPossibleToRotate() or getPossibleToGoBackground()) :
-        LeakDetectionAlgo(driver)
-
     return CurrentView
 
 
@@ -124,3 +121,23 @@ def compareEl(oldList, NewList):
             if oldList[i] is None or oldList[i].clicked:
                 NewList[i] = None
     return NewList
+
+
+def FillEditView(editViewList, userName, password):
+    if len(editViewList) == 2:
+        username = editViewList[0]
+        AppendToLog("EditView with id: " + str(username.id) + " has been clicked and filled with string: " + userName)
+        username.clicked = True
+        username.click()
+        username.send_keys(userName)
+        Password = editViewList[1]
+        AppendToLog("EditView with id: " + str(username.id) + " has been clicked and filled with string: " + password)
+        Password.clicked = True
+        Password.click()
+        Password.send_keys(password)
+
+
+def ClickLoginButton(driver, ButtonViewList):
+    for el in ButtonViewList:
+        if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in":
+            return ClickButton(driver, el)

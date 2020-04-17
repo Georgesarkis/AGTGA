@@ -25,6 +25,16 @@ def ElementFinder(driver, x, y):
             if x == el.location["x"] and y == el.location["y"]:
                 return el
 
+    if "ImageButton" in source:
+        ImageButtonList = driver.find_elements_by_class_name('android.widget.ImageButton')
+        for el in ImageButtonList:
+            if x == el.location["x"] and y == el.location["y"]:
+                return el
 
+    if "CheckedTextView" in source:
+        CheckedTextViewList = driver.find_elements_by_class_name('android.widget.CheckedTextView')
+        for el in CheckedTextViewList:
+            if x == el.location["x"] and y == el.location["y"]:
+                return el
 
     return None

@@ -12,7 +12,33 @@ PossibleToGoBackground = True
 NumberOfActionsInThisTestCase = 0
 NumberOfViewsInThisTestCase = 0
 LenghtOfTestCase = 0
+username = ""
+password = ""
+RootView = None
 
+def SetRootView(v):
+    global RootView
+    RootView = v
+
+def GetRootView():
+    global RootView
+    return RootView
+
+def SetUsername(u):
+    global username
+    username = u
+
+def SetPassword(p):
+    global password
+    password = p
+
+def GetUsername():
+    global username
+    return username
+
+def GetPassword():
+    global password
+    return password
 
 def RestartNumberOfActionsInThisTestCase():
     global NumberOfActionsInThisTestCase
