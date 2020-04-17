@@ -8,6 +8,7 @@ To run this tool you need to have following tools/frameworks installed:
 * python 3.*
 * Appium Server
 * Appium Client
+* openCV
 * JDK
 
 Moreover, you need to connect your android phone to your computer and confirm:
@@ -80,6 +81,8 @@ To run the generated test-cases:
 
 
 # Additional information
-for more information please check: https://docs.google.com/document/d/1ifs-jdqyqSSAA2qixPVZZLl9UEur3YlRK174owTBOa0/edit?usp=sharing
+for more information please check: https://drive.google.com/file/d/1UJuCAHBIuqoHSBqa1JDPOWBVyQCEULld/view?usp=sharing
 
+thesis proposal: https://docs.google.com/document/d/1ifs-jdqyqSSAA2qixPVZZLl9UEur3YlRK174owTBOa0/edit?usp=sharing
+The main concept: https://drive.google.com/file/d/1wo1MwjgJkRr_j-i2U2fi6cLkgnuvq7ND/view?usp=sharing
 The main algorithm can be found in https://drive.google.com/file/d/1vgK-Ent6BYPK_YaqoVxQvajgsGAtHjGI/view
