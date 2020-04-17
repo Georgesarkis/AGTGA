@@ -8,6 +8,7 @@ To run this tool you need to have following tools/frameworks installed:
 * python 3.*
 * Appium Server
 * Appium Client
+* openCV
 * JDK
 
 Moreover, you need to connect your android phone to your computer and confirm:
