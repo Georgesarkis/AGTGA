@@ -123,7 +123,7 @@ def compareEl(oldList, NewList):
     return NewList
 
 
-def FillEditView(editViewList, userName, password):
+def FillEditView(driver,editViewList, userName, password):
     if len(editViewList) == 2:
         username = editViewList[0]
         AppendToLog("EditView with id: " + str(username.id) + " has been clicked and filled with string: " + userName)
@@ -135,6 +135,7 @@ def FillEditView(editViewList, userName, password):
         Password.clicked = True
         Password.click()
         Password.send_keys(password)
+        ClickBackButton(driver)
 
 
 def ClickLoginButton(driver, ButtonViewList, TextViewList):

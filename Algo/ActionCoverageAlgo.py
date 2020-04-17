@@ -92,7 +92,7 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
     if not ButtonListViewChecked and RandomList == 1:
         for el in ButtonListView:
             if el is not None and el.clicked is False:
-                el = randomElementSelector(ButtonListView, 0)
+                el = randomElementSelector(ButtonListView)
                 if el is not None:
                     return el
         ButtonListViewChecked = True
@@ -101,7 +101,7 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
     if not ImageViewListChecked and RandomList == 2:
         for el in ImageViewList:
             if el is not None and el.clicked is False:
-                el = randomElementSelector(ImageViewList, 0)
+                el = randomElementSelector(ImageViewList)
                 if el is not None:
                     return el
         ImageViewListChecked = True
@@ -110,7 +110,7 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
     if not TextViewListChecked and RandomList == 3:
         for el in TextViewList:
             if el is not None and el.clicked is False:
-                el = randomElementSelector(TextViewList, 0)
+                el = randomElementSelector(TextViewList)
                 if el is not None:
                     return el
         TextViewListChecked = True
@@ -119,7 +119,7 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
     if not ImageButtonListChecked and RandomList == 4:
         for el in ImageButtonList:
             if el is not None and el.clicked is False:
-                el = randomElementSelector(ImageButtonList, 0)
+                el = randomElementSelector(ImageButtonList)
                 if el is not None:
                     return el
         ImageButtonListChecked = True
@@ -128,7 +128,7 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
     if not CheckTextListChecked and RandomList == 5:
         for el in CheckTextList:
             if el is not None and el.clicked is False:
-                el = randomElementSelector(CheckTextList, 0)
+                el = randomElementSelector(CheckTextList)
                 if el is not None:
                     return el
         CheckTextListChecked = True
@@ -140,22 +140,20 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
         return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,ImageButtonListChecked, CheckTextListChecked)
 
 
-def randomElementSelector(list, count):
-    ListSize = len(list)
-    i = random.randrange(0, ListSize)
-    if count >= len(list):
-        return None
-    if list[i] is not None and list[i].clicked is False:
-        return list[i]
+def randomElementSelector(l):
+    i = random.randrange(0, len(l))
+    if l[i] is not None and l[i].clicked is False:
+        return l[i]
     else:
-        return randomElementSelector(list, count + 1)
+        NewL = l.pop(i)
+        return randomElementSelector(NewL)
 
 
 def FillEditFiled(_driver, _currentView):
     ## TODO: take screenshot here, before filling in editView
     EditViewList = _currentView.EditViewList
     if EditViewList == 2:
-        FillEditView(EditViewList, GetUsername(), GetPassword())
+        FillEditView(_driver,EditViewList, GetUsername(), GetPassword())
         ClickLoginButton(_driver, _currentView.ButtonViewList, _currentView.TextViewList)
     else:
         for el in EditViewList:

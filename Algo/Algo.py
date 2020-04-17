@@ -22,9 +22,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     SetRootView(CurrentView)
 
     if username != "" and password != "":
-        FillEditView(CurrentView.getEditViewList(), username, password)
-        print("will press back button")
-        ClickBackButton(driver)
+        FillEditView(_driver,CurrentView.getEditViewList(), username, password)
 
         if ClickLoginButton(driver, _currentView.ButtonViewList, _currentView.TextViewList) and TestServer:
             if ConnectToTestServer(driver):
