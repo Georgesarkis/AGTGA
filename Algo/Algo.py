@@ -26,7 +26,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
         print("will press back button")
         ClickBackButton(driver)
 
-        if ClickLoginButton(driver, CurrentView.getButtonViewList()) and TestServer:
+        if ClickLoginButton(driver, _currentView.ButtonViewList, _currentView.TextViewList) and TestServer:
             if ConnectToTestServer(driver):
                 time.sleep(10)
                 CurrentView = NewView(driver, CurrentView)
@@ -54,6 +54,6 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
 def ConnectToTestServer(driver):
     ButtonViewList = FindElements('ButtonView', driver)
     for el in ButtonViewList:
-        if el.text.lower() == "yes":
+        if el.text.lower() == "yes" or el.text.lower() == "ja":
             return ClickButton(driver, el)
     return False

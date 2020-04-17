@@ -75,6 +75,7 @@ def AppendScoresToCode():
     s = s + "# Test-case length: " + str(getLenghtOfTestCase() * 3)
     AppendCode(s)
 
+
 def AppendCodeEditText(el, str):
     AppendCodeClickButton(el)
     s = "el.send_keys(" + str + ") \n"
@@ -83,9 +84,9 @@ def AppendCodeEditText(el, str):
 
 
 def AppendCodeLeakDetectionBackground():
-    AppendCode('driver.orientation = "LANDSCAPE"')
-    AppendCode('driver.orientation = "PORTRAIT"')
+    AppendCode('driver.background_app(1)')
 
 
 def AppendCodeLeakDetectionRotation():
-    AppendCode('driver.background_app(1)')
+    AppendCode('driver.orientation = "LANDSCAPE"')
+    AppendCode('driver.orientation = "PORTRAIT"')

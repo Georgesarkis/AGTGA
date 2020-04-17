@@ -137,7 +137,12 @@ def FillEditView(editViewList, userName, password):
         Password.send_keys(password)
 
 
-def ClickLoginButton(driver, ButtonViewList):
+def ClickLoginButton(driver, ButtonViewList, TextViewList):
     for el in ButtonViewList:
-        if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in":
+        if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in" or el.text.lower() == "logga in":
+            print("in login button if statment")
+            return ClickButton(driver, el)
+    for el in TextViewList:
+        if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in" or el.text.lower() == "logga in":
+            print("in login button if statment")
             return ClickButton(driver, el)

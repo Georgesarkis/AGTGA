@@ -45,7 +45,16 @@ def MainActionCoverageAlgo(_driver, _v):
             return False
 
 
+def ApplicationCrashed(_currentView):
+    if len(_currentView.TextViewList) == 1 and "has stopped" in _currentView.TextViewList[0].text:
+        return True
+    return False
+
+
 def RecursiveActionCoverage(_driver, _currentView):
+    if ApplicationCrashed(_currentView):
+        return None
+
     FillEditFiled(_driver, _currentView)
     el = ChooseElement(_currentView, False, False, False, False, False)
     view = _currentView
@@ -147,7 +156,7 @@ def FillEditFiled(_driver, _currentView):
     EditViewList = _currentView.EditViewList
     if EditViewList == 2:
         FillEditView(EditViewList, GetUsername(), GetPassword())
-        ClickLoginButton(_driver, _currentView.ButtonViewList)
+        ClickLoginButton(_driver, _currentView.ButtonViewList, _currentView.TextViewList)
     else:
         for el in EditViewList:
             if el.clicked == False:
