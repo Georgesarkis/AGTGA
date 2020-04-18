@@ -72,7 +72,6 @@ def AppendCodeBackButtonClick():
 def AppendCodeEditText(el, str):
     AppendCodeClickButton(el)
     s = "el.send_keys('" + str + "') \n"
-    s = s + "driver.back()"
     AppendCode(s)
 
 

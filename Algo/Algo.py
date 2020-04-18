@@ -24,8 +24,12 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     if username != "" and password != "":
         FillEditView(_driver,CurrentView.getEditViewList(), username, password)
 
-        if ClickLoginButton(driver, _currentView.ButtonViewList, _currentView.TextViewList) and TestServer:
+        if getVerbose(): print("will try to press login")
+        val = ClickLoginButton(driver)
+        if val and TestServer:
+            print("in if")
             if ConnectToTestServer(driver):
+                print("in second if")
                 time.sleep(10)
                 CurrentView = NewView(driver, CurrentView)
             else:

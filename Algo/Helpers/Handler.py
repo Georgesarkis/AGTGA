@@ -30,7 +30,7 @@ def NewView(driver, CurrentView):
     # Create new object for View
     ViewIDCount = CurrentView.SelfID + 1
     CurrentView = View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList, CheckedTextList)
-    if getVerbose(): print("new view is created with screenshot location: " + ScreenShotLocation)
+    print("new view is created with screenshot location: " + ScreenShotLocation)
     Views.append(CurrentView)
     if getVerbose(): print("Views list size: " + str(len(Views)))
 
@@ -140,7 +140,12 @@ def FillEditView(driver,editViewList, userName, password):
         ClickBackButton(driver)
 
 
-def ClickLoginButton(driver, ButtonViewList, TextViewList):
+def ClickLoginButton(driver, ButtonViewList=None, TextViewList=None):
+    if ButtonViewList is None:
+        ButtonViewList = driver.find_elements_by_class_name('android.widget.Button')
+    if TextViewList is None:
+        TextViewList = driver.find_elements_by_class_name('android.widget.TextView')
+
     for el in ButtonViewList:
         if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in" or el.text.lower() == "logga in":
             if getVerbose(): print("in login button if statment")

@@ -62,8 +62,8 @@ def RecursiveActionCoverage(_driver, _currentView):
         if ClickButton(_driver, el):
             res = CheckOldViews(_driver)
             if res is not None:
-                if getVerbose(): print("found old view with id: " + str(res.SelfID))
-                if getVerbose(): print("old view screenshot location is :" + res.ScreenShotLocation)
+                print("found old view with id: " + str(res.SelfID))
+                print("old view screenshot location is :" + res.ScreenShotLocation)
                 view = UpdateView(_driver, res)
                 if view.getSelfID() == GetRootView().getSelfID():
                     return None
@@ -154,18 +154,16 @@ def randomElementSelector(l):
 def FillEditFiled(_driver, _currentView):
     ## TODO: take screenshot here, before filling in editView
     EditViewList = _currentView.EditViewList
-    if EditViewList == 2:
+    if len(EditViewList) == 2:
         FillEditView(_driver,EditViewList, GetUsername(), GetPassword())
         ClickLoginButton(_driver, _currentView.ButtonViewList, _currentView.TextViewList)
     else:
         for el in EditViewList:
-            if el.clicked == False:
-                el.clicked = True
-                str = randomString()
-                AppendCodeEditText(el, str)
-                el.click()
-                el.send_keys(str)
-                ClickBackButton(_driver)
+            str = randomString()
+            AppendCodeEditText(el, str)
+            el.click()
+            el.send_keys(str)
+            ClickBackButton(_driver)
     ## TODO: take screenshot here, after filling in editView
     ## TODO: compore both screenshots to know if something big has been change
 
