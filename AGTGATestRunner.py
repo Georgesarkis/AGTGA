@@ -40,18 +40,30 @@ def Run(TestList):
 def PrintTheResaults(TestList):
     avgLength = 0
     numberOfTestList = 0
-    print("************************************************************************")
-    print("*   FILENAME    *   TEST-CASE LENGTH  *   BUG PRODUCED  *      EXCEPTION")
-    print("************************************************************************")
+    print("********************************************************************************************")
+    print("*   FILENAME    *    PRIORITY    *  TEST-CASE LENGTH  *   BUG PRODUCED  *  EXCEPTION")
+    print("********************************************************************************************")
     for l in TestList:
         Reproduced = "True" if l.Reproduced else "False"
-        print("* " + l.TestID + "  *         " + str(l.Length) + "          *       " + Reproduced + "      *  " + l.ExceptionMSG)
-        print("________________________________________________________________________")
+        priority = " LOW  "
+        if Reproduced:
+            priority = "HIGH"
+        else:
+            if l.Length > 100:
+                priority = " HIGH "
+            elif l.Length > 50:
+                priority = "MEDIUM"
+            else:
+                priority = " LOW  "
+
+        print("* " + l.TestID +"  *      "   + priority + "      *         " + str(l.Length) + "         *       " + Reproduced + "      *  " + l.ExceptionMSG)
+        print("____________________________________________________________________________________________")
+
         if l.Length > 18:
             avgLength = avgLength + l.Length
             numberOfTestList = numberOfTestList + 1
     print("*   Average Test-Case Length  =              " + str(avgLength/numberOfTestList) +"         *")
-    print("************************************************************************")
+    print("********************************************************************************************")
 
 
 if __name__ == "__main__":
