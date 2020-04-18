@@ -3,6 +3,15 @@ from TestSuite.Test import Test
 import subprocess
 
 
+def PrintStart():
+    print("********************************************************************************************")
+    print("*   FILENAME    *    PRIORITY    *  TEST-CASE LENGTH  *   BUG PRODUCED  *  EXCEPTION")
+    print("********************************************************************************************")
+
+def PrintEnd(avg):
+    print("*   Average Test-Case Length               =                         " + avg)
+    print("********************************************************************************************")
+
 def PrepareTheList(l, path):
     TestList = []
     for f in l:
@@ -23,13 +32,16 @@ def Run(TestList):
         try:
             print("executing the " + f.TestID)
             path = "py " + str(f.TestID)
-            myCmd = subprocess.run(path, stdout=subprocess.PIPE)
+            myCmd = subprocess.run(path, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             if "TestCase finished successfully" in str(myCmd.stdout):
                 f.Reproduced = False
                 f.ExceptionMSG = "None"
+            elif "Error: socket hang up" in  str(myCmd.stderr):
+                f.Reproduced = False
+                f.ExceptionMSG = "Server-side error occurred. Please rerun this test-case"
             else:
                 f.Reproduced = True
-                f.ExceptionMSG = str(myCmd.stdout)
+                f.ExceptionMSG = "test-case failed to execute with following message: " + str(myCmd.stderr)
 
         except Exception as e:
             f.Reproduced = True
@@ -40,9 +52,8 @@ def Run(TestList):
 def PrintTheResaults(TestList):
     avgLength = 0
     numberOfTestList = 0
-    print("********************************************************************************************")
-    print("*   FILENAME    *    PRIORITY    *  TEST-CASE LENGTH  *   BUG PRODUCED  *  EXCEPTION")
-    print("********************************************************************************************")
+
+    PrintStart()
     for l in TestList:
         Reproduced = "True" if l.Reproduced else "False"
         priority = " LOW  "
@@ -54,16 +65,15 @@ def PrintTheResaults(TestList):
             elif l.Length > 50:
                 priority = "MEDIUM"
             else:
-                priority = " LOW  "
+                priority = " LOW"
 
-        print("* " + l.TestID +"  *      "   + priority + "      *         " + str(l.Length) + "         *       " + Reproduced + "     *  " + l.ExceptionMSG)
+        print("* " + l.TestID + "  *      " + priority + "      *         " + str(l.Length) + "         *       " + Reproduced + "     *  " + l.ExceptionMSG)
         print("____________________________________________________________________________________________")
 
         if l.Length > 18:
             avgLength = avgLength + l.Length
             numberOfTestList = numberOfTestList + 1
-    print("*   Average Test-Case Length               =                         " + str(avgLength/numberOfTestList))
-    print("********************************************************************************************")
+    PrintEnd(str(avgLength / numberOfTestList))
 
 
 if __name__ == "__main__":
