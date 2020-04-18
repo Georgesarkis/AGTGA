@@ -3,7 +3,7 @@ import os
 from appium import webdriver
 from Algo.Algo import AlgoMain
 from Algo.Classes.View import View
-from Algo.Helpers.Generator import AppendToLog, CreateTheCode, AppendScoresToCode
+from Algo.Helpers.Generator import AppendToLog, CreateTheCode
 from Algo.Helpers.Handler import FindElements
 from Algo.Helpers.InformationHolder import *
 
@@ -35,10 +35,8 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer, Verb
         except Exception as e:
             if getVerbose(): print("Exception aquired with message: " + str(e))
             AppendToLog("Exception aquired with message: " + str(e))
-            AppendScoresToCode()
             setCount(getCount() + 1)
-        AppendScoresToCode()
-    AppendScoresToCode()
+
 
 def NewView(driver):
     # CreateLog

@@ -2,7 +2,8 @@ import os
 import time
 
 from Algo.Classes.View import View
-from Algo.Helpers.Generator import AppendToLog, TakeScreenShot, AppendCodeClickButton, AppendCodeBackButtonClick
+from Algo.Helpers.Generator import AppendToLog, TakeScreenShot, AppendCodeClickButton, AppendCodeBackButtonClick, \
+    AppendCodeEditText
 from Algo.Helpers.InformationHolder import *
 from Algo.Helpers.ViewChecker import ActivityChecker, ViewChecker
 from Algo.LeakDetectionAlgo import LeakDetectionAlgo
@@ -90,7 +91,6 @@ def FindElements(ClassType, driver):
 
     for el in List:
         el.clicked = False
-
     if getVerbose(): print("list size for " + ClassType + " is: " + str(len(List)))
 
     return List
@@ -130,11 +130,13 @@ def FillEditView(driver,editViewList, userName, password):
         username.clicked = True
         username.click()
         username.send_keys(userName)
+        AppendCodeEditText(username, userName)
         Password = editViewList[1]
         AppendToLog("EditView with id: " + str(username.id) + " has been clicked and filled with string: " + password)
         Password.clicked = True
         Password.click()
         Password.send_keys(password)
+        AppendCodeEditText(Password, password)
         ClickBackButton(driver)
 
 

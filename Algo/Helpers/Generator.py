@@ -69,13 +69,6 @@ def AppendCodeBackButtonClick():
     AppendCode("driver.back()")
 
 
-def AppendScoresToCode():
-    s = "# Number of actions taken in this test-case: " + str(getNumberOfActionsInThisTestCase()) + "\n"
-    s = s + "# Number of Views visited: " + str(getNumberOfViewsInThisTestCase()) + "\n"
-    s = s + "# Test-case length: " + str(getLenghtOfTestCase() * 3)
-    AppendCode(s)
-
-
 def AppendCodeEditText(el, str):
     AppendCodeClickButton(el)
     s = "el.send_keys(" + str + ") \n"

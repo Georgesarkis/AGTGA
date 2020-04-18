@@ -141,6 +141,8 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
 
 
 def randomElementSelector(l):
+    if l is None:
+        return None
     i = random.randrange(0, len(l))
     if l[i] is not None and l[i].clicked is False:
         return l[i]

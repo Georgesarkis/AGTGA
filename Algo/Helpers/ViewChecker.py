@@ -18,7 +18,7 @@ def ActivityChecker(OldActivity, NewActivity):
 # if it's not same view it returns true else returns false
 def ViewChecker(img1, img2):
     res = ImageComputing(img1, img2)
-    if getVerbose(): print("cmparing: " + img1 + " with " + img2 + " the score is " + str(res))
+    if getVerbose(): print("comparing: " + img1 + " with " + img2 + " the score is " + str(res))
     if res >= 95:
         return False
     else:
@@ -38,7 +38,9 @@ def CheckOldViews(driver):
     driver.get_screenshot_as_file(img2)
 
     for V in Views:
-        if len(V.ImageViewList) == len(ImageView) and len(V.TextViewList) == len(TextView)  and len(V.EditViewList) == len(EditView)  and len(V.ButtonViewList) == len(ButtonView)  and len(V.ImageButtonList) == len(ImageButton) and len(V.CheckedTextList) == len(CheckedTextView):
+        if len(V.ImageViewList) == len(ImageView) and len(V.TextViewList) == len(TextView) and \
+                len(V.EditViewList) == len(EditView) and len(V.ButtonViewList) == len(ButtonView) and \
+                len(V.ImageButtonList) == len(ImageButton) and len(V.CheckedTextList) == len(CheckedTextView):
             img1 = V.getScreenShotLocation()
             if not ViewChecker(img1, img2):
                 return V
