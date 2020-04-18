@@ -7,7 +7,7 @@ from Algo.Helpers.ViewChecker import ViewChecker
 
 
 def LeakDetectionAlgo(driver):
-    print("LeakDetectionAlgo")
+    if getVerbose(): print("LeakDetectionAlgo")
     if getPossibleToRotate():
         try:
             AppendToLog("rotating the screen to LANDSCAPE")
@@ -26,7 +26,7 @@ def LeakDetectionAlgo(driver):
         oldScreenShot = os.getcwd() + "/ScreenShots/oldScreenShot.png"
         driver.get_screenshot_as_file(oldScreenShot)
         oldActvity = driver.current_activity
-        print("setting application to the background")
+        if getVerbose(): print("setting application to the background")
         driver.background_app(1)
         time.sleep(10)
         newActivity = driver.current_activity

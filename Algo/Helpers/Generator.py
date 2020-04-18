@@ -4,7 +4,7 @@ from Algo.Helpers.InformationHolder import *
 
 
 def AppendToLog(log):
-    print(log)
+    if getVerbose(): print(log)
     log = log + "\n"
     file1 = open(os.getcwd() + "/ScreenShots/log" + str(getCount()) + ".txt", "a")
     file1.write(log)
@@ -20,7 +20,7 @@ def TakeScreenShot(t, driver):
     if not os.path.exists(path):
         os.makedirs(path)
     ScreenShotLocation = path + "/V" + str(_actionCount) + ".png"
-    print(ScreenShotLocation)
+    if getVerbose(): print(ScreenShotLocation)
     setActionCount(_actionCount + 1)
     driver.get_screenshot_as_file(ScreenShotLocation)
     return ScreenShotLocation

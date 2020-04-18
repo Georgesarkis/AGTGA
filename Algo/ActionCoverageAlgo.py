@@ -4,10 +4,10 @@ from random import *
 from Algo.Helpers.Generator import AppendCodeClickButton, AppendCodeEditText
 from Algo.Helpers.Handler import *
 from Algo.Helpers.ViewChecker import CheckOldViews
+from Algo.Helpers.InformationHolder import *
 import random
 import string
 
-from Algo.Helpers.InformationHolder import *
 
 
 def ActionCoverageAlgo(_driver, _currentView):
@@ -15,11 +15,11 @@ def ActionCoverageAlgo(_driver, _currentView):
 
 
 def MainActionCoverageAlgo(_driver, _v):
-    print("ActionCoverageAlgo")
+    if getVerbose(): print("ActionCoverageAlgo")
     _currentView = RecursiveActionCoverage(_driver, _v)
 
     if _currentView == None:
-        print("restarting the AGTGA")
+        if getVerbose(): print("restarting the AGTGA")
         return False
 
     """
@@ -28,20 +28,20 @@ def MainActionCoverageAlgo(_driver, _v):
         return True
     """
 
-    print("will press back button")
+    if getVerbose(): print("will press back button")
     ClickBackButton(_driver)
     BackView = CheckOldViews(_driver)
-    print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(getActionCount()) + " trying to go back and try again")
+    if getVerbose(): print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(getActionCount()) + " trying to go back and try again")
     if BackView is not None:
         return MainActionCoverageAlgo(_driver, BackView)
     else:
         Currentactivity = _driver.current_activity
         if Currentactivity[:2] == getActivity()[:2]:
-            print("New view has been found...")
+            if getVerbose(): print("New view has been found...")
             View = NewView(_driver, _currentView)
             return MainActionCoverageAlgo(_driver, View)
         else:
-            print("Close the app unintentionally, will try to start again")
+            if getVerbose(): print("Close the app unintentionally, will try to start again")
             return False
 
 
@@ -62,8 +62,8 @@ def RecursiveActionCoverage(_driver, _currentView):
         if ClickButton(_driver, el):
             res = CheckOldViews(_driver)
             if res is not None:
-                print("found old view with id: " + str(res.SelfID))
-                print("old view screenshot location is :" + res.ScreenShotLocation)
+                if getVerbose(): print("found old view with id: " + str(res.SelfID))
+                if getVerbose(): print("old view screenshot location is :" + res.ScreenShotLocation)
                 view = UpdateView(_driver, res)
                 if view.getSelfID() == GetRootView().getSelfID():
                     return None

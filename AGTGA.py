@@ -46,34 +46,30 @@ desired_caps = {  # UiAutomator2 UiAutomator1 Espresso
 }
 
 
-def main(pathToApk="F:/AGTGA/APKS/posifon.apk", deviceName="Moto G (5)", algo='LeakDetection', durationToWait=3, userName=None,password=None, TestServer=False):
+def main(pathToApk="F:/AGTGA/APKS/posifon.apk", deviceName="Moto G (5)", algo='LeakDetection', durationToWait=3, userName=None,password=None, TestServer=False, Verbose=False):
     desired_caps["app"] = pathToApk
     desired_caps["deviceName"] = deviceName
     if userName is None or password is None:
         userName = ""
         password = ""
-    Main.run(desired_caps, userName, password, algo, durationToWait, TestServer)
+    Main.run(desired_caps, userName, password, algo, durationToWait, TestServer,Verbose)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("APKPath", help="Path to the location of the apk you want to test")
     parser.add_argument("DeviceName", help="Name of the device that is connected to your computer and you want to test on")
-    parser.add_argument("Algo", help="Algorithm you want to use to generate the test case, available options: ActionCoverage, LeakDetection")
+    # TODO Leak detection is disabled because it returns alot of false positives.
+    # parser.add_argument("Algo", help="Algorithm you want to use to generate the test case, available options: ActionCoverage, LeakDetection")
     parser.add_argument("Duration", help="Duration to wait in seconds after every single action")
 
     parser.add_argument("--Username", help="Username of the login if app requires login")
     parser.add_argument("--Password", help="Password of the login if app requires login")
     parser.add_argument("--TestServer", help="If exist will connect to test server", action="store_true")
+    parser.add_argument("--Verbose", help="If exist verbose will be enabled", action="store_true")
 
     args = parser.parse_args()
-    """
-    print(args.APKPath)
-    print(args.DeviceName)
-    print(args.Algo)
-    print(args.Duration)
-    print(args.Username)
-    print(args.Password)
-    print(args.TestServer)
-    """
-    main(args.APKPath, args.DeviceName,  args.Algo, int(args.Duration), args.Username, args.Password, args.TestServer)
+
+    # TODO Leak detection is disabled because it returns alot of false positives.
+    # main(args.APKPath, args.DeviceName,  args.Algo, int(args.Duration), args.Username, args.Password, args.TestServer)
+    main(args.APKPath, args.DeviceName,  "ActionCoverage", int(args.Duration), args.Username, args.Password, args.TestServer, args.Verbose)

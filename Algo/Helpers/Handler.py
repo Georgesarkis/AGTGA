@@ -29,9 +29,9 @@ def NewView(driver, CurrentView):
     # Create new object for View
     ViewIDCount = CurrentView.SelfID + 1
     CurrentView = View(ViewIDCount, ScreenShotLocation, ImageViewList, TextViewList, EditViewList, ButtonViewList, ImageButtonList, CheckedTextList)
-    print("new view is created with screenshot location: " + ScreenShotLocation)
+    if getVerbose(): print("new view is created with screenshot location: " + ScreenShotLocation)
     Views.append(CurrentView)
-    print("Views list size: " + str(len(Views)))
+    if getVerbose(): print("Views list size: " + str(len(Views)))
 
     return CurrentView
 
@@ -91,13 +91,13 @@ def FindElements(ClassType, driver):
     for el in List:
         el.clicked = False
 
-    print("list size for " + ClassType + " is: " + str(len(List)))
+    if getVerbose(): print("list size for " + ClassType + " is: " + str(len(List)))
 
     return List
 
 
 def UpdateView(driver, CurrentView):
-    print("updating view")
+    if getVerbose(): print("updating view")
     _buttonViewList = FindElements('ButtonView', driver)
     _editViewList = FindElements('EditView', driver)
     _textViewList = FindElements('TextView', driver)
@@ -141,9 +141,9 @@ def FillEditView(driver,editViewList, userName, password):
 def ClickLoginButton(driver, ButtonViewList, TextViewList):
     for el in ButtonViewList:
         if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in" or el.text.lower() == "logga in":
-            print("in login button if statment")
+            if getVerbose(): print("in login button if statment")
             return ClickButton(driver, el)
     for el in TextViewList:
         if el.text.lower() == "login" or el.text.lower() == "signin" or el.text.lower() == "log in" or el.text.lower() == "sign in" or el.text.lower() == "logga in":
-            print("in login button if statment")
+            if getVerbose(): print("in login button if statment")
             return ClickButton(driver, el)

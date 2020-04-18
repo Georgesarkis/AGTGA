@@ -5,7 +5,7 @@ import numpy as np
 from Algo.Classes.View import View
 from Algo.Helpers.Generator import TakeScreenShot
 from Algo.Helpers.ImageComputing import ImageComputing
-from Algo.Helpers.InformationHolder import getViewList
+from Algo.Helpers.InformationHolder import getViewList, getVerbose
 
 
 def ActivityChecker(OldActivity, NewActivity):
@@ -18,7 +18,7 @@ def ActivityChecker(OldActivity, NewActivity):
 # if it's not same view it returns true else returns false
 def ViewChecker(img1, img2):
     res = ImageComputing(img1, img2)
-    print("cmparing: " + img1 + " with " + img2 + " the score is " + str(res))
+    if getVerbose(): print("cmparing: " + img1 + " with " + img2 + " the score is " + str(res))
     if res >= 95:
         return False
     else:

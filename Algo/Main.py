@@ -8,12 +8,14 @@ from Algo.Helpers.Handler import FindElements
 from Algo.Helpers.InformationHolder import *
 
 
-def run(desired_caps, username, password, algo, durationToWait, TestServer):
+def run(desired_caps, username, password, algo, durationToWait, TestServer, Verbose):
     port = 'http://localhost:4723/wd/hub'
     Finished = False
     setDesiredCap(desired_caps)
+    setVerbose(Verbose)
     count = getCount()
-    ''' this is used in testing environment, to not go in while loop and try catch, to get more detailed explanation about the crash of the tool(AGTGA) not the app
+    ''' this is used in testing environment, to not go in while loop and try catch, to get more detailed explanation about the crash of the tool(AGTGA) not the app'''
+    '''
     CreateTheCode()
     driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
     CurrentView = NewView(driver)
@@ -26,12 +28,12 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer):
         try:
             driver = webdriver.Remote(command_executor=port, desired_capabilities=desired_caps)
             CurrentView = NewView(driver)
-            print("run number: " + str(count))
+            if getVerbose(): print("run number: " + str(count))
             Finished = AlgoMain(driver, CurrentView, algo, username, password, durationToWait, TestServer)
             driver.quit()
             setCount(getCount() + 1)
         except Exception as e:
-            print("Exception aquired with message: " + str(e))
+            if getVerbose(): print("Exception aquired with message: " + str(e))
             AppendToLog("Exception aquired with message: " + str(e))
             AppendScoresToCode()
             setCount(getCount() + 1)

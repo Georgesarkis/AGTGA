@@ -29,7 +29,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
                 time.sleep(10)
                 CurrentView = NewView(driver, CurrentView)
             else:
-                print("something bad happend when trying to connect to test server")
+                if getVerbose(): print("something bad happend when trying to connect to test server")
                 time.sleep(10)
                 CurrentView = NewView(driver, CurrentView)
         else:
@@ -38,8 +38,10 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
     else:
         time.sleep(10)
         CurrentView = NewView(driver, CurrentView)
-    print("the algo value is")
-    print(algo)
+
+    if getVerbose(): print("the algo value is")
+    if getVerbose(): print(algo)
+
     if algo == "ActionCoverage":
         setLeakDetection(False)
         return ActionCoverageAlgo(driver, CurrentView)

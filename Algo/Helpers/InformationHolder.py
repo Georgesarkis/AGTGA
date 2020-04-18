@@ -15,6 +15,15 @@ LenghtOfTestCase = 0
 username = ""
 password = ""
 RootView = None
+Verbose = False
+
+def setVerbose(v):
+    global Verbose
+    Verbose = v
+
+def getVerbose():
+    global Verbose
+    return Verbose
 
 def SetRootView(v):
     global RootView
