@@ -33,7 +33,7 @@ def CreateTheCode():
     log = log + "from TestSuite.TestSuiteHelper import ElementFinder \n \n \n"
     log = log + "port = 'http://localhost:4723/wd/hub' \n"
     log = log + "driver = webdriver.Remote(command_executor=port, desired_capabilities=" + AppendDesiredCap() + ") \n \n"
-    log = log + "time.sleep(5)\n"
+    log = log + "time.sleep(2)\n"
 
     _testCaseCount = getCount()
     file1 = open(os.getcwd() + "/TestSuite/TestSuite/TestCase" + str(_testCaseCount) + ".py", "w+")
@@ -58,7 +58,7 @@ def AppendDesiredCap():
 
 def AppendCodeClickButton(el):
     AddLenghtOfTestCase()
-    s = "time.sleep(5) \n"
+    s = "time.sleep(2) \n"
     s = s + "el = ElementFinder(driver, " + str(el.location["x"]) + "," + str(el.location["y"]) + ") \n"
     s = s + "el.click()"
     AppendCode(s)
@@ -71,7 +71,7 @@ def AppendCodeBackButtonClick():
 
 def AppendCodeEditText(el, str):
     AppendCodeClickButton(el)
-    s = "el.send_keys(" + str + ") \n"
+    s = "el.send_keys('" + str + "') \n"
     s = s + "driver.back()"
     AppendCode(s)
 

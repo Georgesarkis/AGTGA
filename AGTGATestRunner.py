@@ -24,7 +24,7 @@ def Run(TestList):
             print("executing the " + f.TestID)
             path = "py " + str(f.TestID)
             myCmd = subprocess.run(path, stdout=subprocess.PIPE)
-            if myCmd == "TestCase finished successfully":
+            if "TestCase finished successfully" in str(myCmd.stdout):
                 f.Reproduced = False
                 f.ExceptionMSG = "None"
             else:
@@ -46,7 +46,7 @@ def PrintTheResaults(TestList):
     for l in TestList:
         Reproduced = "True" if l.Reproduced else "False"
         priority = " LOW  "
-        if Reproduced:
+        if l.Reproduced:
             priority = "HIGH"
         else:
             if l.Length > 100:
@@ -56,13 +56,13 @@ def PrintTheResaults(TestList):
             else:
                 priority = " LOW  "
 
-        print("* " + l.TestID +"  *      "   + priority + "      *         " + str(l.Length) + "         *       " + Reproduced + "      *  " + l.ExceptionMSG)
+        print("* " + l.TestID +"  *      "   + priority + "      *         " + str(l.Length) + "         *       " + Reproduced + "     *  " + l.ExceptionMSG)
         print("____________________________________________________________________________________________")
 
         if l.Length > 18:
             avgLength = avgLength + l.Length
             numberOfTestList = numberOfTestList + 1
-    print("*   Average Test-Case Length  =              " + str(avgLength/numberOfTestList) +"         *")
+    print("*   Average Test-Case Length               =                         " + str(avgLength/numberOfTestList))
     print("********************************************************************************************")
 
 
