@@ -81,5 +81,5 @@ To run the generated test-cases:
 
 
 # Additional information
-The main concept: https://drive.google.com/file/d/1wo1MwjgJkRr_j-i2U2fi6cLkgnuvq7ND/view?usp=sharing
-The main algorithm can be found in https://drive.google.com/file/d/1vgK-Ent6BYPK_YaqoVxQvajgsGAtHjGI/view
+The component diagram: https://drive.google.com/file/d/1D44rE8sV1zaWEnqItN87eReIAmmXUPcT/view?usp=sharing
+The main algorithm can be found in https://drive.google.com/file/d/1BicPbzYXAZ05_E5IjjK1YXqwn7L_A4Nk/view?usp=sharing
