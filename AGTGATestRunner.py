@@ -15,12 +15,20 @@ def PrintEnd(avg):
 def PrepareTheList(l, path):
     TestList = []
     for f in l:
-        File = open(path + "/" + f, "a")
-        File.write("print('TestCase finished successfully') \n")
-        File.close()
+
         File = open(path + "/" + f)
         FileLength = len(File.readlines())
         File.close()
+
+        File = open(path + "/" + f, "a")
+        lineList = File.readlines()
+        LastLine = lineList[len(lineList) - 1]
+        if LastLine == "print('TestCase finished successfully')":
+            File.close()
+        else:
+            File.write("print('TestCase finished successfully')")
+            File.close()
+
         t = Test(f, None, False, FileLength)
         TestList.append(t)
 

@@ -147,8 +147,8 @@ def randomElementSelector(l):
     if l[i] is not None and l[i].clicked is False:
         return l[i]
     else:
-        NewL = l.pop(i)
-        return randomElementSelector(NewL)
+        l.pop(i)
+        return randomElementSelector(l)
 
 
 def FillEditFiled(_driver, _currentView):
