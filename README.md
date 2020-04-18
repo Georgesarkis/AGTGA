@@ -30,13 +30,12 @@ To run this tool:
 * Import the master branch and from terminal run following command:
 ```bash
 
-usage: AGTGA.py [-h] [--Username USERNAME] [--Password PASSWORD] [--TestServer] APKPath DeviceName Duration Algo
+usage: AGTGA.py [-h] [--Username USERNAME] [--Password PASSWORD] [--TestServer] [--Verbose] APKPath DeviceName Duration
 
 positional arguments:
   APKPath              Path to the location of the apk you want to test
   DeviceName           Name of the device that is connected to your computer and you want to test on
   Duration             Duration to wait in seconds after every single action
-  Algo                 Algorithm you want to use to generate the test case, available options: ActionCoverage, LeakDetection
 
 optional arguments:
   -h, --help           show this help message and exit
