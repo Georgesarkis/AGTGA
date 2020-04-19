@@ -28,7 +28,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-usage: py AGTGA.py F:/AGTGA/APKS/****.apk "Moto G (5)" LeakDetection 3 --Username=demo@demo.com --Password=********* --TestServer --Verbose
+usage: py AGTGA.py F:/AGTGA/APKS/****.apk ****.**** "Moto G (5)" 3 --Username=demo@demo.com --Password=********* --TestServer --Verbose
 """
 import argparse
 from Algo import Main
@@ -46,19 +46,22 @@ desired_caps = {  # UiAutomator2 UiAutomator1 Espresso
 }
 
 
-def main(pathToApk="F:/AGTGA/APKS/posifon.apk", deviceName="Moto G (5)", algo='LeakDetection', durationToWait=3, userName=None,password=None, TestServer=False, Verbose=False):
+def main(pathToApk,ApplicationID, deviceName, algo='LeakDetection', durationToWait=3,
+         userName=None, password=None, TestServer=False, Verbose=False):
     desired_caps["app"] = pathToApk
     desired_caps["deviceName"] = deviceName
     if userName is None or password is None:
         userName = ""
         password = ""
-    Main.run(desired_caps, userName, password, algo, durationToWait, TestServer,Verbose)
+    Main.run(desired_caps, userName, password, algo, durationToWait, TestServer, Verbose,ApplicationID)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("APKPath", help="Path to the location of the apk you want to test")
-    parser.add_argument("DeviceName", help="Name of the device that is connected to your computer and you want to test on")
+    parser.add_argument("Application_ID", help="ID of the application you want to test")
+    parser.add_argument("DeviceName",
+                        help="Name of the device that is connected to your computer and you want to test on")
     # TODO Leak detection is disabled because it returns alot of false positives.
     # parser.add_argument("Algo", help="Algorithm you want to use to generate the test case, available options: ActionCoverage, LeakDetection")
     parser.add_argument("Duration", help="Duration to wait in seconds after every single action")
@@ -72,4 +75,4 @@ if __name__ == "__main__":
 
     # TODO Leak detection is disabled because it returns alot of false positives.
     # main(args.APKPath, args.DeviceName,  args.Algo, int(args.Duration), args.Username, args.Password, args.TestServer)
-    main(args.APKPath, args.DeviceName,  "ActionCoverage", int(args.Duration), args.Username, args.Password, args.TestServer, args.Verbose)
+    main(args.APKPath,args.Application_ID, args.DeviceName, "ActionCoverage", int(args.Duration), args.Username,args.Password, args.TestServer, args.Verbose)

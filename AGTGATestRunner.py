@@ -4,24 +4,28 @@ import subprocess
 
 
 def PrintStart():
-    print("********************************************************************************************")
-    print("*   FILENAME    *    PRIORITY    *  TEST-CASE LENGTH  *   BUG PRODUCED  *  EXCEPTION")
-    print("********************************************************************************************")
+    print("*****************************************************************************************************************")
+    print("*   FILENAME    *    PRIORITY    *  TEST-CASE LENGTH  *  NUMBER OF ACTIONS  *    BUG PRODUCED  *  EXCEPTION")
+    print("*****************************************************************************************************************")
 
-def PrintEnd(avg):
+def PrintEnd(avg,actionavg):
     print("*   Average Test-Case Length               =                         " + avg)
-    print("********************************************************************************************")
+    print("*   Average Action per Test-case           =                         " + actionavg)
+    print("*****************************************************************************************************************")
 
 def PrepareTheList(l, path):
     TestList = []
     for f in l:
-
         File = open(path + "/" + f)
-        FileLength = len(File.readlines())
+        lineList = File.readlines()
+        FileLength = len(lineList)
         File.close()
 
         File = open(path + "/" + f, "a")
-        lineList = File.readlines()
+        NumberOfActions = 0
+        for l in lineList:
+            if ".click()" in l or ".back()" in l:
+                NumberOfActions = NumberOfActions + 1
         LastLine = lineList[len(lineList) - 1]
         if LastLine == "print('TestCase finished successfully')":
             File.close()
@@ -29,7 +33,7 @@ def PrepareTheList(l, path):
             File.write("print('TestCase finished successfully')")
             File.close()
 
-        t = Test(f, None, False, FileLength)
+        t = Test(f, None, False, FileLength, NumberOfActions)
         TestList.append(t)
 
     return TestList
@@ -59,6 +63,7 @@ def Run(TestList):
 
 def PrintTheResaults(TestList):
     avgLength = 0
+    avgAction = 0
     numberOfTestList = 0
 
     PrintStart()
@@ -75,13 +80,15 @@ def PrintTheResaults(TestList):
             else:
                 priority = " LOW"
 
-        print("* " + l.TestID + "  *      " + priority + "      *         " + str(l.Length) + "         *       " + Reproduced + "     *  " + l.ExceptionMSG)
-        print("____________________________________________________________________________________________")
+        print("* " + l.TestID + "  *      " + priority + "      *         " + str(l.Length) + "         *       " + str(l.NumberOfActions) + "         *       " + Reproduced + "     *  " + l.ExceptionMSG)
+        print("_________________________________________________________________________________________________________________")
 
         if l.Length > 18:
             avgLength = avgLength + l.Length
+            avgAction = avgAction + l.NumberOfActions
             numberOfTestList = numberOfTestList + 1
-    PrintEnd(str(avgLength / numberOfTestList))
+
+    PrintEnd(str(avgLength / numberOfTestList), str(avgAction / numberOfTestList))
 
 
 if __name__ == "__main__":

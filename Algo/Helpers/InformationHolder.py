@@ -16,50 +16,73 @@ username = ""
 password = ""
 RootView = None
 Verbose = False
+ApplicationID = ""
+
+
+def SetApplicationID(i):
+    global ApplicationID
+    ApplicationID = i
+
+
+def GetApplicationID():
+    global ApplicationID
+    return ApplicationID
+
 
 def setVerbose(v):
     global Verbose
     Verbose = v
 
+
 def getVerbose():
     global Verbose
     return Verbose
+
 
 def SetRootView(v):
     global RootView
     RootView = v
 
+
 def GetRootView():
     global RootView
     return RootView
+
 
 def SetUsername(u):
     global username
     username = u
 
+
 def SetPassword(p):
     global password
     password = p
+
 
 def GetUsername():
     global username
     return username
 
+
 def GetPassword():
     global password
     return password
+
 
 def RestartNumberOfActionsInThisTestCase():
     global NumberOfActionsInThisTestCase
     NumberOfActionsInThisTestCase = 0
 
+
 def RestartNumberOfViewsInThisTestCase():
     global NumberOfViewsInThisTestCase
     NumberOfViewsInThisTestCase = 0
 
+
 def RestartLenghtOfTestCase():
     global LenghtOfTestCase
     LenghtOfTestCase = 0
+
 
 def AddLenghtOfTestCase():
     global LenghtOfTestCase

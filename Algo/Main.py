@@ -8,12 +8,13 @@ from Algo.Helpers.Handler import FindElements
 from Algo.Helpers.InformationHolder import *
 
 
-def run(desired_caps, username, password, algo, durationToWait, TestServer, Verbose):
+def run(desired_caps, username, password, algo, durationToWait, TestServer, Verbose, ApplicationID):
     port = 'http://localhost:4723/wd/hub'
     Finished = False
     setDesiredCap(desired_caps)
     setVerbose(Verbose)
     count = getCount()
+    SetApplicationID(ApplicationID)
     ''' this is used in testing environment, to not go in while loop and try catch, to get more detailed explanation about the crash of the tool(AGTGA) not the app'''
     '''
     CreateTheCode()

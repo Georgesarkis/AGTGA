@@ -30,18 +30,20 @@ To run this tool:
 * Import the master branch and from terminal run following command:
 ```bash
 
-usage: AGTGA.py [-h] [--Username USERNAME] [--Password PASSWORD] [--TestServer] [--Verbose] APKPath DeviceName Duration
+usage: AGTGA.py [-h] [--Username USERNAME] [--Password PASSWORD] [--TestServer] [--Verbose] APKPath DeviceName Duration Application_ID
 
 positional arguments:
   APKPath              Path to the location of the apk you want to test
   DeviceName           Name of the device that is connected to your computer and you want to test on
   Duration             Duration to wait in seconds after every single action
+  Application_ID       ID of the application you want to test
 
 optional arguments:
   -h, --help           show this help message and exit
   --Username USERNAME  Username of the login if app requires login
   --Password PASSWORD  Password of the login if app requires login
   --TestServer         If exist will connect to test server
+  --Verbose            If exist verbose will be enabled
 
 ```
 
@@ -71,13 +73,12 @@ Generated test-cases will be python code that was generated on Appium format, fo
 To run the generated test-cases:
 * Connect your android phone to the computer.
 * Run Appium server.
-* Run generated test cases using following commend:
+* Run generated test-cases using following commend:
 ```bash
 
     py AGTGATestRunner.py   #To run all test-case that has been generated
 
 ```
-
 
 # Additional information
 The component diagram: https://drive.google.com/file/d/1mH34C3b7EpN8zPik3oJ42uvo6Ol5SEYq/view?usp=sharing

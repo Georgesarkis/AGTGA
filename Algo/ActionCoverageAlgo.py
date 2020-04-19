@@ -9,7 +9,6 @@ import random
 import string
 
 
-
 def ActionCoverageAlgo(_driver, _currentView):
     return MainActionCoverageAlgo(_driver, _currentView)
 
@@ -18,7 +17,7 @@ def MainActionCoverageAlgo(_driver, _v):
     if getVerbose(): print("ActionCoverageAlgo")
     _currentView = RecursiveActionCoverage(_driver, _v)
 
-    if _currentView == None:
+    if _currentView is None:
         if getVerbose(): print("restarting the AGTGA")
         return False
 
@@ -31,7 +30,8 @@ def MainActionCoverageAlgo(_driver, _v):
     if getVerbose(): print("will press back button")
     ClickBackButton(_driver)
     BackView = CheckOldViews(_driver)
-    if getVerbose(): print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(getActionCount()) + " trying to go back and try again")
+    if getVerbose(): print("COULD NOT PERFORM FULL TESTING, NUMBER OF ACTIONS PERFORMED " + str(
+        getActionCount()) + " trying to go back and try again")
     if BackView is not None:
         return MainActionCoverageAlgo(_driver, BackView)
     else:
@@ -53,6 +53,11 @@ def ApplicationCrashed(_currentView):
 
 def RecursiveActionCoverage(_driver, _currentView):
     if ApplicationCrashed(_currentView):
+        if getVerbose(): print("Application is crashed")
+        return None
+
+    if GetApplicationStatus(_driver) != 4:
+        if getVerbose(): print("Application is closed")
         return None
 
     FillEditFiled(_driver, _currentView)
@@ -81,7 +86,8 @@ def RecursiveActionCoverage(_driver, _currentView):
         return view
 
 
-def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked):
+def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                  ImageButtonListChecked, CheckTextListChecked):
     ButtonListView = _currentView.ButtonViewList
     TextViewList = _currentView.TextViewList
     ImageViewList = _currentView.ImageViewList
@@ -96,7 +102,8 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         ButtonListViewChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                             ImageButtonListChecked, CheckTextListChecked)
 
     if not ImageViewListChecked and RandomList == 2:
         for el in ImageViewList:
@@ -105,7 +112,8 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         ImageViewListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                             ImageButtonListChecked, CheckTextListChecked)
 
     if not TextViewListChecked and RandomList == 3:
         for el in TextViewList:
@@ -114,7 +122,8 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         TextViewListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                             ImageButtonListChecked, CheckTextListChecked)
 
     if not ImageButtonListChecked and RandomList == 4:
         for el in ImageButtonList:
@@ -123,7 +132,8 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         ImageButtonListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                             ImageButtonListChecked, CheckTextListChecked)
 
     if not CheckTextListChecked and RandomList == 5:
         for el in CheckTextList:
@@ -132,12 +142,14 @@ def ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, Tex
                 if el is not None:
                     return el
         CheckTextListChecked = True
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked, ImageButtonListChecked, CheckTextListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                             ImageButtonListChecked, CheckTextListChecked)
 
     if TextViewListChecked and ImageViewListChecked and ButtonListViewChecked and ImageButtonListChecked and CheckTextListChecked:
         return None
     else:
-        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,ImageButtonListChecked, CheckTextListChecked)
+        return ChooseElement(_currentView, ButtonListViewChecked, ImageViewListChecked, TextViewListChecked,
+                             ImageButtonListChecked, CheckTextListChecked)
 
 
 def randomElementSelector(l):
@@ -155,7 +167,7 @@ def FillEditFiled(_driver, _currentView):
     ## TODO: take screenshot here, before filling in editView
     EditViewList = _currentView.EditViewList
     if len(EditViewList) == 2:
-        FillEditView(_driver,EditViewList, GetUsername(), GetPassword())
+        FillEditView(_driver, EditViewList, GetUsername(), GetPassword())
         ClickLoginButton(_driver, _currentView.ButtonViewList, _currentView.TextViewList)
     else:
         for el in EditViewList:
@@ -173,3 +185,7 @@ def randomString():
     RandomStringLength = random.randrange(1, 1000)
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(RandomStringLength))
+
+
+def GetApplicationStatus(driver):
+    return driver.query_app_state(GetApplicationID())
