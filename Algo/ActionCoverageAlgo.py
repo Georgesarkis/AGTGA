@@ -46,18 +46,20 @@ def MainActionCoverageAlgo(_driver, _v):
 
 
 def ApplicationCrashed(_currentView):
-    if len(_currentView.TextViewList) == 1 and "has stopped" in _currentView.TextViewList[0].text:
-        return True
+    if len(_currentView.TextViewList) > 1:
+        if len(_currentView.TextViewList) == 1:
+            if _currentView.TextViewList[0] is not None and "has stopped" in _currentView.TextViewList[0].text:
+                return True
     return False
 
 
 def RecursiveActionCoverage(_driver, _currentView):
     if ApplicationCrashed(_currentView):
-        if getVerbose(): print("Application is crashed")
+        print("Application is crashed")
         return None
 
     if GetApplicationStatus(_driver) != 4:
-        if getVerbose(): print("Application is closed")
+        print("Application is closed")
         return None
 
     FillEditFiled(_driver, _currentView)

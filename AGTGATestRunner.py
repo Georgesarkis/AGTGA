@@ -30,6 +30,9 @@ def PrepareTheList(l, path):
         if LastLine == "print('TestCase finished successfully')":
             File.close()
         else:
+            File.write("driver.press_keycode(3) \n")
+            File.write("driver.close_app() \n")
+            File.write("driver.quit() \n")
             File.write("print('TestCase finished successfully')")
             File.close()
 

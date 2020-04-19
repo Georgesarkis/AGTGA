@@ -31,6 +31,8 @@ def run(desired_caps, username, password, algo, durationToWait, TestServer, Verb
             CurrentView = NewView(driver)
             if getVerbose(): print("run number: " + str(count))
             Finished = AlgoMain(driver, CurrentView, algo, username, password, durationToWait, TestServer)
+            driver.press_keycode(3)
+            driver.close_app()
             driver.quit()
             setCount(getCount() + 1)
         except Exception as e:
