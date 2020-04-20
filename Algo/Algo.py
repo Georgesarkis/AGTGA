@@ -27,9 +27,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
         if getVerbose(): print("will try to press login")
         val = ClickLoginButton(driver)
         if val and TestServer:
-            print("in if")
             if ConnectToTestServer(driver):
-                print("in second if")
                 time.sleep(10)
                 CurrentView = NewView(driver, CurrentView)
             else:
