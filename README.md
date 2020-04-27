@@ -9,7 +9,10 @@ To run this tool you need to have following tools/frameworks installed:
 * Appium Server
 * Appium Client
 * openCV
+* scikit
 * JDK
+* JRE
+* Androd SDK
 
 Moreover, you need to connect your android phone to your computer and confirm:
 * Developer options is enabled on the android phone
