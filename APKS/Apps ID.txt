@@ -1,0 +1,11 @@
+samsung SM-G390F         Moto G (5)
+
+CNN.apk com.cnn.mobile.android.phone
+LifeHack.apk com.fireshooters.lifetips
+Nike.apk com.nike.omega
+ny.apk com.nytimes.android
+IKEA.apk com.ingka.ikea.app
+posifon.apk posifon.Care
+Groovepad.apk com.easybrain.make.music
+TV4.apk se.tv4.tv4playtab
+Health.apk com.sec.android.app.shealth
