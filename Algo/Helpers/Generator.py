@@ -36,14 +36,61 @@ def CreateTheCode():
     log = log + "time.sleep(2)\n"
 
     _testCaseCount = getCount()
-    file1 = open(os.getcwd() + "/TestSuite/TestSuite/TestCase" + str(_testCaseCount) + ".py", "w+")
+    strTestCaseCount = 00
+    if _testCaseCount == 0:
+        strTestCaseCount = "00"
+    elif _testCaseCount == 1:
+        strTestCaseCount = "01"
+    elif _testCaseCount == 2:
+        strTestCaseCount = "02"
+    elif _testCaseCount == 3:
+        strTestCaseCount = "03"
+    elif _testCaseCount == 4:
+        strTestCaseCount = "04"
+    elif _testCaseCount == 5:
+        strTestCaseCount = "05"
+    elif _testCaseCount == 6:
+        strTestCaseCount = "06"
+    elif _testCaseCount == 7:
+        strTestCaseCount = "07"
+    elif _testCaseCount == 8:
+        strTestCaseCount = "08"
+    elif _testCaseCount == 9:
+        strTestCaseCount = "09"
+    else:
+        strTestCaseCount = str(_testCaseCount)
+    file1 = open(os.getcwd() + "/TestSuite/TestSuite/TestCase" + strTestCaseCount + ".py", "w+")
     file1.write(log)
     file1.close()
 
 
 def AppendCode(log):
+    _testCaseCount = getCount()
+    strTestCaseCount = 00
+    if _testCaseCount == 0:
+        strTestCaseCount = "00"
+    elif _testCaseCount == 1:
+        strTestCaseCount = "01"
+    elif _testCaseCount == 2:
+        strTestCaseCount = "02"
+    elif _testCaseCount == 3:
+        strTestCaseCount = "03"
+    elif _testCaseCount == 4:
+        strTestCaseCount = "04"
+    elif _testCaseCount == 5:
+        strTestCaseCount = "05"
+    elif _testCaseCount == 6:
+        strTestCaseCount = "06"
+    elif _testCaseCount == 7:
+        strTestCaseCount = "07"
+    elif _testCaseCount == 8:
+        strTestCaseCount = "08"
+    elif _testCaseCount == 9:
+        strTestCaseCount = "09"
+    else:
+        strTestCaseCount = str(_testCaseCount)
     log = log + "\n"
-    file1 = open(os.getcwd() + "/TestSuite/TestSuite/TestCase" + str(getCount()) + ".py", "a")
+    file1 = open(os.getcwd() + "/TestSuite/TestSuite/TestCase" + strTestCaseCount + ".py", "a")
     file1.write(log)
     file1.close()
 
