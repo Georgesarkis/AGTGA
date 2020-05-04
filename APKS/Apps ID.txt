@@ -5,8 +5,25 @@ posifon.apk posifon.Care
 CNN.apk com.cnn.mobile.android.phone
 LifeHack.apk com.fireshooters.lifetips
 Nike.apk com.nike.omega
-IKEA.apk com.ingka.ikea.app
-TV4.apk se.tv4.tv4playtab
-Blocket.apk se.appcorn.Blocket
-Groovepad.apk com.easybrain.make.music
-Health.apk com.sec.android.app.shealth
+
+
+IKEA.apk com.ingka.ikea.app                                     py AGTGA.py F:/AGTGA/APKS/IKEA.apk  com.ingka.ikea.app "samsung SM-G390F" 3 --Verbose
+TV4.apk se.tv4.tv4playtab                                       py AGTGA.py F:/AGTGA/APKS/TV4.apk  se.tv4.tv4playtab "samsung SM-G390F" 3 --Verbose
+Blocket.apk se.appcorn.Blocket                                  py AGTGA.py F:/AGTGA/APKS/Blocket.apk  se.appcorn.Blocket "samsung SM-G390F" 3 --Verbose
+Health.apk com.sec.android.app.shealth                          py AGTGA.py F:/AGTGA/APKS/Health.apk   com.sec.android.app.shealth  "samsung SM-G390F" 3 --Verbose
+calm.apk com.calm.android                                       py AGTGA.py F:/AGTGA/APKS/calm.apk  com.calm.android "samsung SM-G390F" 3 --Verbose
+
+Dominos.apk com.dominospizza                                    py AGTGA.py F:/AGTGA/APKS/Dominos.apk  com.calm.android "Moto G (5)" 3 --Verbose
+AB.apk se.aftonbladet.start                                     py AGTGA.py F:/AGTGA/APKS/AB.apk  com.calm.android "Moto G (5)" 3 --Verbose
+Pinchos.apk se.viento.pinchos                                   py AGTGA.py F:/AGTGA/APKS/Pinchos.apk  com.calm.android "Moto G (5)" 3 --Verbose
+layoutInsta.apk com.instagram.layout                            py AGTGA.py F:/AGTGA/APKS/layoutInsta.apk  com.calm.android "Moto G (5)" 3 --Verbose
+1weather.apk com.handmark.expressweather                        py AGTGA.py F:/AGTGA/APKS/1weather.apk  com.calm.android "Moto G (5)" 3 --Verbose
+
+
+Limiations:
+ 1. adds
+ 2. videos
+ 3. scrollable view
+ 4. xapk
+ 5. continuesly updating the contant of the page
+ 6. AGTGA freezes when there is inbuild audio player like in calm
