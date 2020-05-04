@@ -1,11 +1,10 @@
 samsung SM-G390F         Moto G (5)
 
-ny.apk com.nytimes.android
-posifon.apk posifon.Care
-CNN.apk com.cnn.mobile.android.phone
-LifeHack.apk com.fireshooters.lifetips
-Nike.apk com.nike.omega
-
+ny.apk com.nytimes.android                                      py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/ny.apk com.nytimes.android "Moto G (5)" 3 --Verbose
+posifon.apk posifon.Care                                        py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/posifon.apk posifon.Care "Moto G (5)" 3 --Username=demo4@konto.se --Password=Sommar2018 --TestServer --Verbose
+CNN.apk com.cnn.mobile.android.phone                            py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/CNN.apk com.cnn.mobile.android.phone "Moto G (5)" 3 --Verbose
+LifeHack.apk com.fireshooters.lifetips                          py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/LifeHack.apk com.fireshooters.lifetips "Moto G (5)" 3 --Verbose
+Nike.apk com.nike.omega                                         py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/Nike.apk com.nike.omega "Moto G (5)" 3 --Verbose
 
 IKEA.apk com.ingka.ikea.app                                     py AGTGA.py F:/AGTGA/APKS/IKEA.apk  com.ingka.ikea.app "samsung SM-G390F" 3 --Verbose
 TV4.apk se.tv4.tv4playtab                                       py AGTGA.py F:/AGTGA/APKS/TV4.apk  se.tv4.tv4playtab "samsung SM-G390F" 3 --Verbose
