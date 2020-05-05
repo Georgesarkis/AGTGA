@@ -2,9 +2,9 @@ samsung SM-G390F         Moto G (5)
 
 ny.apk com.nytimes.android                                      py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/ny.apk com.nytimes.android "Moto G (5)" 3 --Verbose
 posifon.apk posifon.Care                                        py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/posifon.apk posifon.Care "Moto G (5)" 3 --Username=demo4@konto.se --Password=Sommar2018 --TestServer --Verbose
-CNN.apk com.cnn.mobile.android.phone                            py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/CNN.apk com.cnn.mobile.android.phone "Moto G (5)" 3 --Verbose
 LifeHack.apk com.fireshooters.lifetips                          py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/LifeHack.apk com.fireshooters.lifetips "Moto G (5)" 3 --Verbose
-Nike.apk com.nike.omega                                         py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/Nike.apk com.nike.omega "Moto G (5)" 3 --Verbose
+CNN.apk com.cnn.mobile.android.phone                            py AGTGA.py C:/Users/ze0396/Desktop/AGTGA/APKS/CNN.apk com.cnn.mobile.android.phone "Moto G (5)" 3 --Verbose
+Nike.apk com.nike.omega                                         py AGTGA.py F:/AGTGA/APKS/Nike.apk com.nike.omega "Moto G (5)" 3 --Verbose
 
 IKEA.apk com.ingka.ikea.app                                     py AGTGA.py F:/AGTGA/APKS/IKEA.apk  com.ingka.ikea.app "samsung SM-G390F" 3 --Verbose
 TV4.apk se.tv4.tv4playtab                                       py AGTGA.py F:/AGTGA/APKS/TV4.apk  se.tv4.tv4playtab "samsung SM-G390F" 3 --Verbose
@@ -12,12 +12,11 @@ Blocket.apk se.appcorn.Blocket                                  py AGTGA.py F:/A
 Health.apk com.sec.android.app.shealth                          py AGTGA.py F:/AGTGA/APKS/Health.apk   com.sec.android.app.shealth  "samsung SM-G390F" 3 --Verbose
 calm.apk com.calm.android                                       py AGTGA.py F:/AGTGA/APKS/calm.apk  com.calm.android "samsung SM-G390F" 3 --Verbose
 
-Dominos.apk com.dominospizza                                    py AGTGA.py F:/AGTGA/APKS/Dominos.apk  com.calm.android "Moto G (5)" 3 --Verbose
-AB.apk se.aftonbladet.start                                     py AGTGA.py F:/AGTGA/APKS/AB.apk  com.calm.android "Moto G (5)" 3 --Verbose
-Pinchos.apk se.viento.pinchos                                   py AGTGA.py F:/AGTGA/APKS/Pinchos.apk  com.calm.android "Moto G (5)" 3 --Verbose
-layoutInsta.apk com.instagram.layout                            py AGTGA.py F:/AGTGA/APKS/layoutInsta.apk  com.calm.android "Moto G (5)" 3 --Verbose
-1weather.apk com.handmark.expressweather                        py AGTGA.py F:/AGTGA/APKS/1weather.apk  com.calm.android "Moto G (5)" 3 --Verbose
-
+Dominos.apk com.dominospizza                                    py AGTGA.py F:/AGTGA/APKS/Dominos.apk  com.dominospizza "samsung SM-G390F" 3 --Verbose
+Pinchos.apk se.viento.pinchos                                   py AGTGA.py F:/AGTGA/APKS/Pinchos.apk  se.viento.pinchos "samsung SM-G390F" 3 --Verbose
+layoutInsta.apk com.instagram.layout                            py AGTGA.py F:/AGTGA/APKS/layoutInsta.apk  com.instagram.layout "samsung SM-G390F" 3 --Verbose
+1weather.apk com.handmark.expressweather                        py AGTGA.py F:/AGTGA/APKS/1weather.apk com.handmark.expressweather "samsung SM-G390F" 3 --Verbose
+ZaraHome.apk com.inditex.ecommerce.zarahome.android             py AGTGA.py F:/AGTGA/APKS/ZaraHome.apk com.inditex.ecommerce.zarahome.android "samsung SM-G390F" 3 --Verbose
 
 Limiations:
  1. adds
