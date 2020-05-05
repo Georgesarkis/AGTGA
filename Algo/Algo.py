@@ -41,8 +41,7 @@ def AlgoMain(_driver, _currentView, algo, username, password, durationToWait, Te
         time.sleep(10)
         CurrentView = NewView(driver, CurrentView)
 
-    if getVerbose(): print("the algo value is")
-    if getVerbose(): print(algo)
+    if getVerbose(): print("the algo value is" + algo)
 
     if algo == "ActionCoverage":
         setLeakDetection(False)

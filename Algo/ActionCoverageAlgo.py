@@ -72,7 +72,8 @@ def RecursiveActionCoverage(_driver, _currentView):
                 print("found old view with id: " + str(res.SelfID))
                 print("old view screenshot location is :" + res.ScreenShotLocation)
                 view = UpdateView(_driver, res)
-                if view.getSelfID() == GetRootView().getSelfID():
+                if view.getSelfID() == GetRootView().getSelfID() and len(getViewList()) > 4:
+                    print("Root view and current view is the same restarting algo")
                     return None
 
             else:
