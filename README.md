@@ -84,5 +84,5 @@ To run the generated test-cases:
 ```
 
 # Additional information
-The component diagram: https://drive.google.com/file/d/1mH34C3b7EpN8zPik3oJ42uvo6Ol5SEYq/view?usp=sharing
+The component diagram: https://drive.google.com/file/d/1mH34C3b7EpN8zPik3oJ42uvo6Ol5SEYq/view?usp=sharing <br />
 The main algorithm: https://drive.google.com/file/d/1BicPbzYXAZ05_E5IjjK1YXqwn7L_A4Nk/view?usp=sharing
