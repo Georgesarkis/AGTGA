@@ -17,8 +17,8 @@ To run this tool you need to have following tools/frameworks installed:
 Moreover, you need to connect your android phone to your computer and confirm:
 * Developer options is enabled on the android phone
 * USB debugging in enabled on the android phone
-* Android phone is recognized by the computer (should also worked with emulator. For how to setup with emulator, check: https://appium.io/)
-
+* Android phone is recognized by the computer
+Or run android emulator
 
 ## constrains
 This tool will perform the best if:
@@ -37,7 +37,7 @@ usage: AGTGA.py [-h] [--Username USERNAME] [--Password PASSWORD] [--TestServer] 
 
 positional arguments:
   APKPath              Path to the location of the apk you want to test
-  DeviceName           Name of the device that is connected to your computer and you want to test on
+  DeviceName           Name of the device/emulator that you want to test on
   Duration             Duration to wait in seconds after every single action
   Application_ID       ID of the application you want to test
 
