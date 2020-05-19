@@ -1,7 +1,7 @@
 samsung SM-G390F         Moto G (5)
 
 ny.apk com.nytimes.android                                      py AGTGA.py ~/AGTGA/APKS/ny.apk com.nytimes.android "Moto G (5)" 3 --Verbose
-posifon.apk posifon.Care                                        py AGTGA.py ~/AGTGA/APKS/posifon.apk posifon.Care "Moto G (5)" 3 --Username=demo4@konto.se --Password=Sommar2018 --TestServer --Verbose
+posifon.apk posifon.Care                                        py AGTGA.py ~/AGTGA/APKS/posifon.apk posifon.Care "Moto G (5)" 3 --Username=***********@***********.com --Password=*********** --TestServer --Verbose
 LifeHack.apk com.fireshooters.lifetips                          py AGTGA.py ~/AGTGA/APKS/LifeHack.apk com.fireshooters.lifetips "Moto G (5)" 3 --Verbose
 CNN.apk com.cnn.mobile.android.phone                            py AGTGA.py ~/AGTGA/APKS/CNN.apk com.cnn.mobile.android.phone "Moto G (5)" 3 --Verbose
 Nike.apk com.nike.omega                                         py AGTGA.py ~/AGTGA/APKS/Nike.apk com.nike.omega "Moto G (5)" 3 --Verbose
